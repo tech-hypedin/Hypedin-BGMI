@@ -1,0 +1,6 @@
+rank,score,tier,name,IGN,college,accountRank,structured_pts,essay_pts,penalty,flags,rationale,email
+1,80,TOP-TIER SHORTLIST,Aarav Strong,AaravOP,SRCC,Conqueror,35,44.6,0,,,aarav@example.com
+2,15,REJECT,Bhavya Mid,BhavGG,DU North,Gold,17,11.1,13,short:convert; short:newPlayers; short:campusPopularity; short:reasoning; low-avg-length; below-min,,bhavya@example.com
+3,6,REJECT,Copy Paste Karan,KaranCP,VIT,Diamond,26,5.0,25,short:convert; short:newPlayers; short:campusPopularity; short:reasoning; low-avg-length; dup-essays(1.00); convert-no-numbers; below-min,,karan@example.com
+4,0,REJECT,Spammy Filler,xX_Spam_Xx,Unknown,Silver,13,1.8,24,short:convert; short:newPlayers; short:campusPopularity; short:reasoning; low-avg-length; generic-filler(-7); convert-no-numbers; below-min,,spam@example.com
+5,0,REJECT,No Time Nina,NinaAce,IIT B,Ace,25,30.3,11,GATE:no-time; short:newPlayers; short:campusPopularity; short:reasoning; low-avg-length,,nina@example.com

@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "title": "BGMI Campus MVP — Applicant Screening Rubric",
+  "note": "Canonical scoring spec. score.py loads this directly; apps_script/Code.gs embeds an identical copy (keep in sync).",
+  "weights": { "structured_total": 35, "essay_total": 65, "grand_total": 100 },
+
+  "structured": {
+    "accountRank_points": {
+      "Bronze": 2, "Silver": 3, "Gold": 4, "Platinum": 5, "Diamond": 6,
+      "Crown": 7, "Ace": 8, "Ace Master": 9, "Ace Dominator": 9, "Conqueror": 10
+    },
+    "accessChannels_points_by_count": [0, 2, 5, 8, 10],
+    "tournamentExp_yes_points": 4,
+    "hasExperience_yes_points": 3,
+    "hasTime_yes_points": 8
+  },
+
+  "essays": {
+    "convert":          { "max_points": 17, "prompt": "You must bring 100 players for a BGMI event in your college. What EXACT steps will you take?", "focus": "planning + execution: specific channels, quantified targets, realistic timeline, risk-awareness" },
+    "newPlayers":       { "max_points": 17, "prompt": "How will you convert NON-BGMI players into players?", "focus": "understanding barriers + persuasion strategy + scalability" },
+    "campusPopularity": { "max_points": 16, "prompt": "BGMI is losing popularity in your campus. What will you do to bring the hype back?", "focus": "root-cause analysis + creative/novel solution + stakeholder buy-in" },
+    "reasoning":        { "max_points": 15, "prompt": "Why should we recruit you?", "focus": "self-awareness + concrete fit to the role + genuine (non-generic) motivation" }
+  },
+
+  "heuristic_essay": {
+    "comment": "Used when no LLM key is present. Measurable proxies for quality, blended to a 0-10 score.",
+    "weights": { "length": 0.30, "specificity": 0.40, "concreteness": 0.20, "structure": 0.10 },
+    "length_words_to_score": [[0,0],[20,2],[40,4],[80,6],[150,8],[250,9],[400,10]],
+    "specificity_signals": [
+      "whatsapp","instagram","discord","telegram","hostel","society","societies","club","fest","festival",
+      "poster","posters","reel","reels","story","stories","scrim","scrims","tournament","tournaments",
+      "lan","prize","prizes","giveaway","registration","register","signup","sign-up","booth","stall",
+      "email","emails","dm","dms","collaborat","partner","sponsor","mentor","bootcamp","trial","demo",
+      "week","weeks","day","days","month","months","phase","timeline","schedule","deadline","follow up","follow-up","retention","convert","onboard"
+    ],
+    "specificity_full_at": 8,
+    "concreteness_full_at": 3
+  },
+
+  "red_flags": {
+    "short_essay_words": 40,
+    "short_essay_penalty": 2,
+    "low_avg_words": 60,
+    "low_avg_penalty": 5,
+    "cross_essay_similarity_flag": 0.85,
+    "cross_essay_similarity_penalty": 8,
+    "generic_phrases": [
+      "i am hardworking","i love bgmi","i will do my best","i am passionate","i am a team player",
+      "i will bring changes","i will work hard","i believe in myself","i am committed","trust me",
+      "i promise","i am confident","everything is possible","i will never give up","bgmi is my life"
+    ],
+    "generic_phrase_penalty": 1,
+    "generic_phrase_cap": 2,
+    "no_numbers_in_convert_penalty": 4
+  },
+
+  "gates": {
+    "hasTime_no_is_reject": true,
+    "min_total_score_to_pass": 30
+  },
+
+  "tiers": [
+    { "min": 80, "label": "TOP-TIER SHORTLIST" },
+    { "min": 70, "label": "STRONG SHORTLIST" },
+    { "min": 50, "label": "SHORTLIST" },
+    { "min": 30, "label": "REVIEW" },
+    { "min": 0,  "label": "REJECT" }
+  ],
+
+  "sheet_columns_in_order": [
+    "Timestamp","name","IGN","UID","email","phoneNo","college","course","currentYear","accountRank",
+    "hasExperience","experienceDetails","groups","hasAccessTo","tournamentExp","newPlayers","convert",
+    "campusPopularity","hasTime","reasoning","status"
+  ]
+}

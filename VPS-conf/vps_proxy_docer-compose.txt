@@ -1,0 +1,36 @@
+services:
+	nginx:
+		image: nginx:alpine
+		container_name: reverse-proxy_nginx
+		restart: always
+		ports:
+			- "80:80"
+			- "443:443"
+		volumes:
+			- ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+			- /etc/letsencrypt:/etc/letsencrypt:ro
+			- /var/www/certbot:/var/www/certbot:ro
+		networks:
+			- hypedin-bgmi_hypedin-BGMI_network
+			- hypedin-level-up_hypedin-level-up_network
+			- hypedin-fateh-dashboard_hypedin-fateh_network
+
+networks:
+	hypedin-bgmi_hypedin-BGMI_network:
+		external: true
+	hypedin-level-up_hypedin-level-up_network:
+		external: true
+	hypedin-fateh-dashboard_hypedin-fateh_network:
+		external: true
+
+
+
+
+
+vps proxy folder structure:
+└── root/
+    └── opt/
+        └── reverse-proxy/
+            ├── docker-compose.yaml
+            └── nginx/
+                └── default.conf

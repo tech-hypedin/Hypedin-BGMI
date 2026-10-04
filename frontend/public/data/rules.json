@@ -1,0 +1,26 @@
+[
+    {
+        "id": "DO_ENGAGEMENT",
+        "title": "Mandatory Mandates (Do's)",
+        "type": "DO",
+        "items": [
+            "Interact with all community members",
+            "Encourage squads & healthy rivalries",
+            "Keep the WhatsApp group inclusive",
+            "Zero tolerance for hacks or mods",
+            "Follow all POC communication guidelines"
+        ]
+    },
+    {
+        "id": "DONT_VIOLATIONS",
+        "title": "Prohibited Vector Violations (Don'ts)",
+        "type": "DONT",
+        "items": [
+            "Misuse channels for self-promotion",
+            "Exclude registered participants",
+            "Show favouritism in selection",
+            "Submit fake screenshots or numbers",
+            "Trash-talk other campuses"
+        ]
+    }
+]

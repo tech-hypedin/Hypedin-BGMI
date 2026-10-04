@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/:path*",
+        "destination": "https://hypedin-bgmi-3rnd.vercel.app/:path*"
+      }
+    ]
+}

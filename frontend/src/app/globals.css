@@ -1,0 +1,291 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-heading: var(--font-heading);
+	--font-body: var(--font-body);
+	--font-teko: var(--font-teko);
+	--color-ring: var(--ring);
+	--color-input: var(--input);
+	--color-border: var(--border);
+	--color-destructive: var(--destructive);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-accent: var(--accent);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-muted: var(--muted);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-secondary: var(--secondary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary: var(--primary);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-popover: var(--popover);
+	--color-card-foreground: var(--card-foreground);
+	--color-card: var(--card);
+	--color-bgmi-green: var(--bgmi-green);
+
+	--animate-color-pulse: color-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+:root {
+	--background: #000000;
+	--foreground: #e8e8e8;
+	--card: #0c0c0c;
+	--card-foreground: #ffffff;
+	--popover: #0c0c0c;
+	--popover-foreground: #ffffff;
+	--primary: #ffb60e;
+	--primary-foreground: #000000;
+	--secondary: #161616;
+	--secondary-foreground: #ffffff;
+	--muted: #161616;
+	--muted-foreground: #a8a8a8;
+	--accent: #ffb60e;
+	--accent-foreground: #000000;
+	--destructive: #dc2626;
+	--bgmi-green: #128807;
+	--border: #222222;
+	--input: #222222;
+	--ring: #ffb60e;
+	--radius: 0px;
+}
+
+.dark {
+	--background: #000000;
+	--foreground: #e8e8e8;
+	--card: #0c0c0c;
+	--card-foreground: #ffffff;
+	--popover: #0c0c0c;
+	--popover-foreground: #ffffff;
+	--primary: #ffb60e;
+	--primary-foreground: #000000;
+	--secondary: #161616;
+	--secondary-foreground: #ffffff;
+	--muted: #161616;
+	--muted-foreground: #a8a8a8;
+	--accent: #ffb60e;
+	--accent-foreground: #000000;
+	--destructive: #dc2626;
+	--bgmi-green: #128807;
+	--border: #222222;
+	--input: #222222;
+	--ring: #ffb60e;
+}
+
+html {
+	/* non-static so framer-motion scroll offsets measure against a positioned container */
+	position: relative;
+	scroll-behavior: smooth;
+	scroll-padding-top: 6rem;
+}
+
+/* visible, on-brand scrollbar */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-track {
+	background: #000000;
+}
+::-webkit-scrollbar-thumb {
+	background: #2a2a2a;
+	border: 2px solid #000000;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #ffb60e;
+}
+
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		@apply bg-background text-foreground font-body subpixel-antialiased overflow-x-hidden;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		@apply font-heading tracking-wide uppercase;
+		/* never let a long word push past the screen edge on phones */
+		overflow-wrap: break-word;
+	}
+	p, span, a, li, label {
+		overflow-wrap: break-word;
+	}
+	:focus-visible {
+		outline: 2px solid var(--primary);
+		outline-offset: 2px;
+	}
+}
+
+@layer utilities {
+	.tactical-panel {
+		@apply bg-card border border-border;
+	}
+
+	.pubg-btn {
+		clip-path: polygon(0 0, 100% 0, 100% 82%, 94% 100%, 0 100%);
+	}
+
+	.clip-corner {
+		clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+	}
+
+	.text-glow {
+		text-shadow: 0 0 14px rgba(255, 153, 50, 0.45);
+	}
+
+	.grid-overlay {
+		background-image:
+			linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+		background-size: 56px 56px;
+	}
+
+	.scanlines {
+		background-image: repeating-linear-gradient(
+			0deg,
+			rgba(255, 255, 255, 0.025) 0px,
+			rgba(255, 255, 255, 0.025) 1px,
+			transparent 1px,
+			transparent 4px
+		);
+	}
+
+	.marquee-track {
+		display: flex;
+		width: max-content;
+		animation: marquee 36s linear infinite;
+	}
+	.marquee-track:hover {
+		animation-play-state: paused;
+	}
+
+	/* diagonal sheen that sweeps across a card on hover */
+	.shine-sweep::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 30;
+		transform: translateX(-130%) skewX(-18deg);
+		background: linear-gradient(
+			90deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.07) 50%,
+			transparent 100%
+		);
+		transition: transform 0.7s ease;
+		pointer-events: none;
+	}
+	.shine-sweep:hover::after {
+		transform: translateX(130%);
+	}
+
+	.ember {
+		position: absolute;
+		bottom: -12px;
+		background: #ffb60e;
+		box-shadow: 0 0 6px 1px rgba(255, 153, 50, 0.55);
+		border-radius: 9999px;
+		opacity: 0;
+		animation: ember-rise linear infinite;
+		pointer-events: none;
+	}
+}
+
+@keyframes ember-rise {
+	0% { transform: translateY(0) translateX(0); opacity: 0; }
+	8% { opacity: 0.55; }
+	55% { opacity: 0.3; transform: translateY(-45vh) translateX(14px); }
+	100% { transform: translateY(-88vh) translateX(-10px); opacity: 0; }
+}
+
+@keyframes marquee {
+	from { transform: translateX(0); }
+	to { transform: translateX(-50%); }
+}
+
+@keyframes glow-pulse {
+	0%, 100% { opacity: 0.35; transform: scale(1); }
+	50% { opacity: 0.7; transform: scale(1.06); }
+}
+
+@keyframes color-pulse {
+	0%, 100% { color: var(--primary); opacity: 1; }
+	50% { color: #ffffff; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	.marquee-track {
+		animation: none;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* ===== SOP-deck atmospheric background + animation =====
+   Overlay layer only — added on top of the official site, content untouched.
+   Rendered by <Atmosphere/> (components/layout/atmosphere.tsx), fixed behind all content. */
+.atmos-map {
+	background: url('/art/erangel.webp') center/cover no-repeat;
+	opacity: 0.10;
+	filter: grayscale(0.4) contrast(1.1) brightness(0.6) sepia(0.3) hue-rotate(-12deg);
+	mix-blend-mode: luminosity;
+}
+.atmos-hex {
+	opacity: 0.45;
+	mix-blend-mode: screen;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48' viewBox='0 0 56 48'%3E%3Cpath d='M14 0l14 8v16l-14 8L0 24V8z M42 0l14 8v16l-14 8-14-8V8z M28 24l14 8v16l-14 8-14-8V32z' fill='none' stroke='%23ff7a1a' stroke-opacity='.10' stroke-width='1'/%3E%3C/svg%3E");
+}
+.atmos-scan {
+	opacity: 0.5;
+	background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0, 0, 0, 0.16) 2px 3px);
+}
+.atmos-vignette {
+	background: radial-gradient(120vw 120vh at 50% 38%, transparent 42%, rgba(0, 0, 0, 0.72) 100%);
+}
+.atmos-ember {
+	position: absolute;
+	bottom: -12px;
+	border-radius: 9999px;
+	background: #ff7a1a;
+	box-shadow: 0 0 8px 1px rgba(255, 122, 26, 0.7);
+	opacity: 0;
+	animation: atmos-rise linear infinite;
+	pointer-events: none;
+}
+@keyframes atmos-rise {
+	0% { transform: translateY(0) translateX(0); opacity: 0; }
+	10% { opacity: 0.9; }
+	90% { opacity: 0.4; }
+	100% { transform: translateY(-106vh) translateX(var(--ember-drift, 20px)); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.atmos-ember { animation: none; }
+}
+
+/* ===== mobile performance + ergonomics ===== */
+@media (max-width: 640px) {
+	/* Prevent iOS auto-zoom on focus (form inputs render below 16px in the design). */
+	input, select, textarea { font-size: 16px; }
+	/* Keep the ember animation but render fewer particles on phones (lighter GPU/CPU). */
+	.atmos-ember:nth-child(n+9) { display: none; }
+}
+/* Belt-and-braces guard against any stray element causing horizontal scroll. */
+html, body { max-width: 100%; }
+
+/* Application form — highlight an incomplete question (red label + red borders). */
+.field-invalid label { color: #ef4444; }
+.field-invalid input,
+.field-invalid select,
+.field-invalid textarea,
+.field-invalid .border { border-color: #ef4444 !important; }

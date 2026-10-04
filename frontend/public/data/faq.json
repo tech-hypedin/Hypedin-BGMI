@@ -1,0 +1,53 @@
+[
+  {
+    "category": "Weekly Responsibilities FAQs",
+    "icon": "Target",
+    "questions": [
+      { "id": "Q1", "question": "Do I need to complete all 3 weekly responsibilities every week?", "answer": "Yes. Weekly responsibilities are the core activities expected from every ambassador and contribute toward your progression in the program." },
+      { "id": "Q2", "question": "What counts as recruiting a new player?", "answer": "A new player is someone who joins your campus WhatsApp group through your referral and remains active in the community." },
+      { "id": "Q3", "question": "Can I recruit students from other colleges?", "answer": "No. Recruitment should focus on students from your own campus unless specifically mentioned otherwise." },
+      { "id": "Q4", "question": "How do I prove that I completed the \"Assault Mastery\" task?", "answer": "You may be required to submit screenshots, invite records, or complete a reporting form provided by the program team." },
+      { "id": "Q5", "question": "What qualifies as a Classic Match for the \"Squad Up\" mission?", "answer": "Any eligible BGMI Classic Match played with students from your college community counts toward the requirement." },
+      { "id": "Q6", "question": "Do all 5 matches need to be played with different students?", "answer": "No. Unless stated otherwise, you can complete the matches with any eligible students from your campus." },
+      { "id": "Q7", "question": "What kind of technical queries qualify for the \"Medic\" mission?", "answer": "Examples include Discord access issues, reporting problems, registration queries, event participation issues, or other ambassador-related support requests." },
+      { "id": "Q8", "question": "How will the program verify that I helped another ambassador?", "answer": "The Discord moderation team or designated community managers may verify interactions through support channels." }
+    ]
+  },
+  {
+    "category": "Elite Missions (Diamond+ Only) FAQs",
+    "icon": "Award",
+    "questions": [
+      { "id": "Q9", "question": "Who can participate in Elite Missions?", "answer": "Only ambassadors who have reached Diamond Rank or higher." },
+      { "id": "Q10", "question": "Can I complete the same Elite Mission multiple times?", "answer": "This depends on program rules. Unless stated otherwise, each approved mission may be rewarded once per activation period." },
+      { "id": "Q11", "question": "What qualifies as a collaborative tournament for \"The Clutch\"?", "answer": "A tournament jointly organized between two or more participating colleges with proper coordination and reporting." },
+      { "id": "Q12", "question": "Do I need approval before organizing a rival college tournament?", "answer": "Yes. It's recommended to seek approval from the program team before announcing or conducting the event." },
+      { "id": "Q13", "question": "What platforms can I use for the \"Streamer\" mission?", "answer": "Any approved streaming platform such as YouTube, Instagram Live, Discord Stage, or other platforms specified by the organizers." },
+      { "id": "Q14", "question": "Does the stream need commentary to qualify?", "answer": "Yes. Commentary is a mandatory part of the \"Streamer\" mission requirements." }
+    ]
+  },
+  {
+    "category": "Bounty Missions FAQs",
+    "icon": "Zap",
+    "questions": [
+      { "id": "Q15", "question": "What are Bounty Missions?", "answer": "Bounty Missions are limited-time flash challenges announced by the program team that offer bonus RP rewards." },
+      { "id": "Q16", "question": "How will I know when a Bounty Mission goes live?", "answer": "Notifications will be sent through official communication channels such as WhatsApp, Discord, email, or app notifications." },
+      { "id": "Q17", "text": "What does \"First 10 campuses\" mean?", "answer": "Only the first 10 campuses that successfully complete and submit the required activity will receive the bonus reward." },
+      { "id": "Q18", "question": "If multiple students from my campus submit entries, which one counts?", "answer": "The earliest valid submission from your campus will generally be considered." },
+      { "id": "Q19", "question": "What happens if my submission is incomplete or unclear?", "answer": "Incomplete, late, or invalid submissions may not qualify for the reward." },
+      { "id": "Q20", "question": "Can Bounty Missions be repeated?", "answer": "Yes. New Bounty Missions may be announced throughout the 90-day program with different objectives and rewards." }
+    ]
+  },
+  {
+    "category": "RP & Rewards FAQs",
+    "icon": "ShieldAlert",
+    "questions": [
+      { "id": "Q21", "question": "What is RP?", "answer": "RP (Royale Points) is the progression currency used to track performance, unlock ranks, and compete on leaderboards." },
+      { "id": "Q22", "question": "When are RP rewards credited?", "answer": "RP is typically credited after successful verification of completed missions." },
+      { "id": "Q23", "question": "What happens if two ambassadors claim the same achievement?", "answer": "The program team will review timestamps and supporting evidence before awarding RP." },
+      { "id": "Q24", "question": "Can RP be deducted?", "answer": "Yes. Fraudulent submissions, rule violations, or misuse of the program may result in RP penalties or disqualification." },
+      { "id": "Q25", "question": "What if I miss a week's responsibilities?", "answer": "You may lose out on RP and leaderboard progression, but you can continue participating in future activities unless otherwise specified." },
+      { "id": "Q26", "question": "Is there a leaderboard?", "answer": "Yes. RP earned through weekly responsibilities, Elite Missions, and Bounty Missions contributes to ambassador rankings and leaderboard positions." },
+      { "id": "Q27", "question": "Can I jump ranks quickly through Elite and Bounty Missions?", "answer": "Yes. Bonus missions are designed to accelerate progression for highly active ambassadors." }
+    ]
+  }
+]

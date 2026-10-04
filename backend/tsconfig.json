@@ -1,0 +1,17 @@
+{
+  "extends": "@tsconfig/node-lts/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "allowJs": true,
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    ".env",
+    "dist"
+  ]
+}
