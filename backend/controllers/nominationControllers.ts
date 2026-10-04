@@ -7,6 +7,7 @@ import Ambassadors from "../models/ambassadorModel.js";
 
 import type { Request, Response } from "express";
 import User from "../models/userModels.js";
+import Applications from "../models/applicationsModel.js";
 
 const nominatePlayer = async (req: Request, res: Response) => {
     const DRIVE_FOLDER_ID = process.env.NOMINATIONS_DRIVE_FOLDER_ID;
@@ -37,6 +38,12 @@ const nominatePlayer = async (req: Request, res: Response) => {
 
         if (!user) {
             return res.status(500).json({ success: false, message: "USER NOT FOUND" });
+        }
+
+        const application = await Applications.findOne({ email: user.email });
+
+        if (!application) {
+            return res.status(500).json({ success: false, message: "USER DETAILS NOT FOUND" });
         }
 
         const ambassador = await Ambassadors.findOne({ UID: playerUID });
@@ -85,6 +92,7 @@ const nominatePlayer = async (req: Request, res: Response) => {
         const sheetData = [[
             new Date().toLocaleString(),
             (req as any).userId,
+            application.name,
             user.UID,
             playerName,
             playerEmail,
