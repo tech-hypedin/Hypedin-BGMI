@@ -104,6 +104,9 @@ export default function SpecificTasksPage() {
                     <p className='text-zinc-400 text-xs sm:text-sm tracking-wide font-medium mt-2 max-w-3xl leading-relaxed'>
                         As an additional engagement layer within the BGMI Campus MVP Program, MVPs and Cohort Players will be encouraged to explore the featured WOW Maps and create content around their best gameplay moments.
                     </p>
+                    <p className='text-zinc-400 text-xs sm:text-sm tracking-wide font-medium mt-2 max-w-3xl leading-relaxed'>
+                       Once an MVP reaches the 6,000 RP cap and completes all existing mandatory tasks, their submission window will close. From then on, the WOW Challenge will be the only way to earn additional XP and climb the leaderboard.
+                    </p>
                 </div>
             </header>
 
