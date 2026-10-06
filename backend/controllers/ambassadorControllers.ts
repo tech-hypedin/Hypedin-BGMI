@@ -484,13 +484,18 @@ const sendNomination = async (req: Request, res: Response) => {
     }
 }
 
-const registerPlayer = async (req: Request, res: Response) => {
+const registerPlayer = async (req: AuthRequest, res: Response) => {
     try {
-        const { name, email, phoneNo, UID, MVPUID, cohort } = req.body;
+        const { name, email, phoneNo, UID, cohort } = req.body;
+        const userId = req.userId;
         const files = (req as any).files;
 
-        if (!name || !email || !phoneNo || !UID || !MVPUID) {
+        if (!name || !email || !phoneNo || !UID) {
             return res.status(400).json({ success: false, message: 'SOME DETAILS ARE MISSING' });
+        }
+
+        if (!userId) {
+            return res.status(500).json({ success: false, message: "USER ID NOT FOUND" });
         }
 
         const isAmbassadorExists = await Ambassadors.findOne({ UID });
@@ -502,7 +507,7 @@ const registerPlayer = async (req: Request, res: Response) => {
         const isUserExists = await User.findOne({ email });
 
         if (isUserExists) {
-            return res.status(400).json({ success: false, message: 'EMAIL ALREADY EXISTS AS A MVP' });
+            return res.status(400).json({ success: false, message: 'EMAIL ALREADY EXISTS AS AN USER' });
         }
 
         const isCohortMemberExistsWithEmail = await Cohort.findOne({ email });
@@ -517,16 +522,22 @@ const registerPlayer = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, message: "PHONE NUMBER ALREADY EXISTS" });
         }
 
-        const ambassador = await Ambassadors.findOne({ UID: MVPUID });
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(500).json({ success: false, message: "USER NOT FOUND" });
+        }
+
+        const ambassador = await Ambassadors.findOne({ ambassadorId: user._id });
 
         if (!ambassador) {
-            return res.status(400).json({ success: false, message: 'INVALID MVP UID' });
+            return res.status(400).json({ success: false, message: 'SOMETHING WENT WRONG' });
         }
 
         const member = await Cohort.findOne({ UID });
 
         if(member) {
-            return res.status(400).json({ sucess: false, message: 'UID IS ALREADY A PART OF A COHORT' });
+            return res.status(400).json({ sucess: false, message: 'UID ALREADY EXISTS' });
         }
 
         let proofUrls: string[] = [];
@@ -572,7 +583,7 @@ const registerPlayer = async (req: Request, res: Response) => {
             email,
             phoneNo,
             UID,
-            MVPUID,
+            MVPUID: ambassador.UID,
             idCardImage: proofUrls,
             cohort: 'Cohort-1',
             signupSeason: 'Season-2'
@@ -587,7 +598,7 @@ const registerPlayer = async (req: Request, res: Response) => {
             email,
             phoneNo,
             UID,
-            MVPUID,
+            ambassador.UID,
             urls,
             MVP_ID,
             'Season-2'

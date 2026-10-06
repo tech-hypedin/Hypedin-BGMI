@@ -8,6 +8,7 @@ import Ambassadors from "../models/ambassadorModel.js";
 import type { Request, Response } from "express";
 import User from "../models/userModels.js";
 import Applications from "../models/applicationsModel.js";
+import Cohort from "../models/cohortModel.js";
 
 const nominatePlayer = async (req: Request, res: Response) => {
     const DRIVE_FOLDER_ID = process.env.NOMINATIONS_DRIVE_FOLDER_ID;
@@ -28,7 +29,7 @@ const nominatePlayer = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, message: "PLAYER HAS BEEN ALREADY NOMINATED" });
         }
 
-        const isPlayerExists = await NominationModel.findOne({ $or: [{ playerEmail, season },{ playerUID, season },{ playerEmail, playerUID, season }] });
+        const isPlayerExists = await NominationModel.findOne({ $or: [{ playerEmail, season },{ playerUID, season },{ playerNumber, season }] });
 
         if (isPlayerExists) {
             return res.status(400).json({ success: false, message: "PLAYER ALREADY EXISTS" });
@@ -40,18 +41,18 @@ const nominatePlayer = async (req: Request, res: Response) => {
             return res.status(500).json({ success: false, message: "USER NOT FOUND" });
         }
 
+        const isPlayerExistsInCohort = await Cohort.findOne({ signupSeason: 'Season-2', email: playerEmail, phoneNo: playerNumber, UID: playerUID, MVPUID: user.UID  });
+
+        if (!isPlayerExistsInCohort) {
+            return res.status(400).json({ success: false, message: "PLAYER DOESN'T EXIST IN YOUR COHORT" });
+        }
+
         const application = await Applications.findOne({ email: user.email });
 
         if (!application) {
             return res.status(500).json({ success: false, message: "USER DETAILS NOT FOUND" });
         }
-
-        const ambassador = await Ambassadors.findOne({ UID: playerUID });
-
-        if(ambassador) {
-            return res.status(400).json({ success: false, message: 'The entered player UID already exists as a ambassador' });
-        }
-
+        
         let proofURL: string[] = [];
 
         if (!DRIVE_FOLDER_ID) {
