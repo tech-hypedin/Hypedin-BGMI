@@ -188,6 +188,15 @@ const submitTaskIntel = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, message: "LINK ALREADY EXISTS" });
         }
 
+        const hasSubmittedClutchDiaries = await Submissions.findOne({ taskId: '6ac0d9bfc6e5c085e2ee3e9f', ambassadorId: ambassador._id });
+
+        if (hasSubmittedClutchDiaries) {
+            const isExists = hasSubmittedClutchDiaries.proofUrls.some(link => proofUrls.includes(link));
+            if (isExists) {
+                return res.status(400).json({ success: false, message: "THE LINK HAS ALREADY BEEN SUBMITTED IN CLUTCH DIARIES" });
+            }
+        }
+
         if (taskId === "6a9c16f3093c4e366e2e623f") {
             const [result] = await Submissions.aggregate([
                 {
@@ -802,6 +811,21 @@ const submitSpecificTask = async (req: AuthRequest, res: Response) => {
         } 
         else if (task.taskType === 'One-Time') {
             period = 'once';
+        }
+
+        const isLinkExists = await Submissions.findOne({ taskId, ambassadorId: ambassador._id, proofUrls: { $in: proofUrls } });
+
+        if (isLinkExists) {
+            return res.status(400).json({ success: false, message: "LINK ALREADY EXISTS" });
+        }
+
+        const hasSubmittedCaptureTheClutch = await Submissions.findOne({ taskId: '6a9c16f3093c4e366e2e623f', ambassadorId: ambassador._id });
+
+        if (hasSubmittedCaptureTheClutch) {
+            const isExists = hasSubmittedCaptureTheClutch.proofUrls.some(link => proofUrls.includes(link));
+            if (isExists) {
+                return res.status(400).json({ success: false, message: "THE LINK HAS ALREADY BEEN SUBMITTED IN CAPTURE THE CLUTCH TASK" });
+            }
         }
 
         let submission;
