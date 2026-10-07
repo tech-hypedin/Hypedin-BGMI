@@ -754,7 +754,11 @@ const leaderboardForSpecificTask = async (req: AuthRequest, res: Response) => {
     try {
         const ambassadors = await Ambassadors.find({});
 
-        const sortedAmbassadors = ambassadors.sort((a,b) => a.xpForSpecificTask - b.xpForSpecificTask);
+        // ascending order
+        // const sortedAmbassadors = ambassadors.sort((a,b) => a.xpForSpecificTask - b.xpForSpecificTask);
+
+        // descending order
+        const sortedAmbassadors = ambassadors.sort((a, b) => b.xpForSpecificTask - a.xpForSpecificTask);
 
         const ambassadorsForLeaderboard = sortedAmbassadors.filter(ambassador => ambassador.xpForSpecificTask > 0);
 
