@@ -273,8 +273,7 @@ interface SubmissionModalProps {
 
 /* ─── Tasks limited to 2 proof link fields ─── */
 const TWO_LINK_TASK_IDS = [
-    '6a9c16f3093c4e366e2e623f',
-    '6a9c17bcf4853e9901eeee21',
+    '6a9c16f3093c4e366e2e623f'
 ];
 
 function SubmissionModal({ task, actionState, reSubmissionRequestId, onClose, onSuccess }: SubmissionModalProps) {

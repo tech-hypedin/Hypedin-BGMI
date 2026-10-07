@@ -2021,8 +2021,7 @@ const PHASES: PhaseConfig[] = [
 
 /* ─── Tasks whose submit button locks once the proof limit is reached ─── */
 const PROOF_LIMIT_TASK_IDS = new Set<string>([
-    '6a9c16f3093c4e366e2e623f',
-    '6a9c17bcf4853e9901eeee21',
+    '6a9c16f3093c4e366e2e623f'
 ]);
 
 export default function MissionsPage() {
