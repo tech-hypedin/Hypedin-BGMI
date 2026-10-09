@@ -181,6 +181,11 @@ const submitTaskIntel = async (req: Request, res: Response) => {
         //     }
         // }
 
+        // check only for season 2
+        if ((task.title === "CAPTURE THE CLUTCH" || task.title === "OFFLINE ACTIVATION") && ambassador.RP >= 6000) {
+            return res.status(400).json({ success: false, message: "YOU HAVE ALREADY REACHED THE MAXIMUM RP LIMIT FOR THIS TASK" });
+        }
+
 
         const isLinkExists = await Submissions.findOne({ taskId, ambassadorId: ambassador._id, proofUrls: { $in: proofUrls } });
 
