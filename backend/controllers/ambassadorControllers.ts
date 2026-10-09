@@ -250,7 +250,6 @@ const submitTaskIntel = async (req: Request, res: Response) => {
         });
 
         if (isTaskSubmitted && task.title !== "CAPTURE THE CLUTCH" && task.title !== "OFFLINE ACTIVATION") {
-            console.log("hgfbdjgfhbj");
             return res.status(400).json({ success: false, message: `WINDOW CLOSED: YOU HAVE ALREADY SUBMITTED FOR THIS ${task.taskType.toUpperCase()} PERIOD.` });
         }
 

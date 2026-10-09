@@ -44,7 +44,7 @@ const submissionSchema = new mongoose.Schema({
     submissionPeriod: { type: String, required: true },
 }, { timestamps: true });
 
-submissionSchema.index({ taskId: 1, ambassadorId: 1, submissionPeriod: 1 }, { unique: true });
+// submissionSchema.index({ taskId: 1, ambassadorId: 1, submissionPeriod: 1 }, { unique: true });
 
 const Submissions = mongoose.model<ISubmission>('Submission', submissionSchema);
 
