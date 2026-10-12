@@ -3247,7 +3247,7 @@ export default function MissionsPage() {
             const submissionCount = getAllSubmissionsForTask(task).length;
 
             // Appears 4 times in submissions -> lock
-            if (submissionCount >= 4) return 'proofLimitReached';
+            if (submissionCount >= 6) return 'proofLimitReached';
 
             // Fewer than 4 -> keep submit open
             return 'submit';
