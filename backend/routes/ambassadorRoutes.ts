@@ -20,7 +20,7 @@ router.post('/nominate', authMiddleware, authRole('Ambassador'), taskUploadMiddl
 router.patch('/verifyAmbassador', authMiddleware, authRole('Ambassador'), verifyAmbassador);
 router.patch('/chooseAvator', authMiddleware, authRole('Ambassador'), chooseAvator)
 router.patch('/chooseAvator', authMiddleware, authRole('Ambassador'), chooseAvator);
-router.post('/recruitPlayer', taskUploadMiddleware.array('idCardImage', 2), registerPlayer);
+router.post('/recruitPlayer', authMiddleware, authRole('Ambassador'), taskUploadMiddleware.array('idCardImage', 2), registerPlayer);
 router.post('/refer', authMiddleware, authRole('Ambassador'), referFriend);
 router.delete('/cohort/:cohortId', authMiddleware, authRole('Ambassador'), deleteCohortPlayer);
 router.get('/getMyReferals', authMiddleware, authRole('Ambassador'), getMyReferals);
