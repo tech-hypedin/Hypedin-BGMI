@@ -78,8 +78,8 @@ interface PhaseConfig { id: number; name: string; start: Date; end: Date; }
 
 const PHASES: PhaseConfig[] = [
     { id: 1, name: 'SEASON 01', start: new Date('2026-08-02T00:00:00.000Z'), end: new Date('2026-09-03T23:59:59.999+05:30') },
-    { id: 2, name: 'SEASON 02', start: new Date('2026-09-05T00:00:00+05:30'), end: new Date('`2026-10-18T23:59:59+05:30`') },
-    { id: 3, name: 'SEASON 03', start: new Date('`2026-10-20T00:00:00+05:30`'), end: new Date('2026-11-04T23:59:59.999Z') },
+    { id: 2, name: 'SEASON 02', start: new Date('2026-09-05T00:00:00+05:30'), end: new Date('2026-10-18T23:59:59+05:30') },
+    { id: 3, name: 'SEASON 03', start: new Date('2026-10-20T00:00:00+05:30'), end: new Date('2026-11-04T23:59:59.999Z') },
 ];
 
 /* ─── Tasks whose submit button locks once the proof limit is reached ─── */
