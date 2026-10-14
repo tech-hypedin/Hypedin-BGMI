@@ -164,7 +164,7 @@ export const RANK_LADDER: RankTier[] = [
 	{ name: "Silver", stage: "Mid-Tier", detail: "Advancement unlocks merchandise exclusivity.", threshold: 500, label: "500 RP", reward: "Small Vouchers (Food / E-commerce)", color: "#C9CDD2" },
 	{ name: "Gold", stage: "Mid-Tier", detail: "Growing recognition with localized assets.", threshold: 1200, label: "1,200 RP", reward: "200 UC + Welcome Kit", color: "#E9B14C" },
 	{ name: "Platinum", stage: "Mid-Tier", detail: "Top of the development band — visible leadership.", threshold: 2500, label: "2,500 RP", reward: "300 UC + Elite Pass", color: "#5FC9C3" },
-	{ name: "Diamond", stage: "Elite", detail: "Sustained high performance; premium digital assets.", threshold: 4000, label: "4,000 RP", reward: "600 UC + Gaming Trigger Set", color: "#6FA8E6" },
+	{ name: "Diamond", stage: "Elite", detail: "Sustained high performance; digital assets.", threshold: 4000, label: "4,000 RP", reward: "600 UC + Gaming Trigger Set", color: "#6FA8E6" },
 	{ name: "Crown", stage: "Elite", detail: "Elevated physical rewards for proven leaders.", threshold: 6000, label: "6,000 RP", reward: "900 UC + Premium Headphones", color: "#E0B24A" },
 	{ name: "Ace", stage: "Summit", detail: "One step from the national apex.", threshold: 8500, label: "8,500 RP", reward: "Level 3 Backpack + Special BGMI Apparel", color: "#E8814B" },
 	{ name: "Conqueror", stage: "Apex", detail: "Top-performing ambassadors on a national scale.", threshold: null, label: "Top 5 Nationally", reward: "National Leaderboard · Prizes worth ₹15,000", color: "#F9423A" },
@@ -288,7 +288,7 @@ export const ROADMAP = [
 /** §V — Recognition & resource allocation (perks) */
 export const PERKS = [
 	{ title: "UC & Elite Pass", detail: "In-game currency and passes scale with your rank, from Gold upward." },
-	{ title: "Gear & Hardware", detail: "Trigger sets, premium headphones and a Level 3 Backpack for proven leaders." },
+	{ title: "Gear & Hardware", detail: "Trigger sets, headphones and exciting goodies for proven leaders." },
 	{ title: "Exclusive Merch", detail: "Special BGMI Apparel and a hamper of tees, keychains and vouchers." },
 	{ title: "National Visibility", detail: "Feature on official channels and prizes worth ₹15,000 at the apex." },
 ] as const;
