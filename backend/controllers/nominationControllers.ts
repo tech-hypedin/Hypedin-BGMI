@@ -41,7 +41,7 @@ const nominatePlayer = async (req: Request, res: Response) => {
             return res.status(500).json({ success: false, message: "USER NOT FOUND" });
         }
 
-        const isPlayerExistsInCohort = await Cohort.findOne({ signupSeason: 'Season-2', email: playerEmail, phoneNo: playerNumber, UID: playerUID, MVPUID: user.UID  });
+        const isPlayerExistsInCohort = await Cohort.findOne({ email: playerEmail, phoneNo: playerNumber, UID: playerUID, MVPUID: user.UID  });
 
         if (!isPlayerExistsInCohort) {
             return res.status(400).json({ success: false, message: "PLAYER DOESN'T EXIST IN YOUR COHORT" });
