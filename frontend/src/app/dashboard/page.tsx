@@ -558,7 +558,7 @@ export default function AmbassadorDashboard() {
                                 initial={{ opacity: 0, y: 14 }} 
                                 animate={{ opacity: 1, y: 0 }} 
                                 transition={{ delay: i * 0.08 }} 
-                                onClick={() => selectedSeason === 2 && router.push('/dashboard/missions')}
+                                onClick={() => selectedSeason === 3 && router.push('/dashboard/missions')}
                                 className='bg-zinc-950/60 border-zinc-800/80 space-y-2.5 sm:space-y-3 border p-3.5 sm:p-4 cursor-pointer hover:border-[#f4c430]/70 transition-colors duration-200'
                             >
                                 <div className='flex items-start justify-between gap-2'>
