@@ -400,6 +400,8 @@ const getTasks = async (req: Request, res: Response) => {
 
         const tasks = await Tasks.find({ status: 'In Progress' }).sort({ createdAt: -1 });
 
+        console.log(tasks);
+
         const submittedTasks = await Submissions.find({ ambassadorId: ambassador._id });
 
         res.status(200).json({ success: true, tasks, submittedTasks });
