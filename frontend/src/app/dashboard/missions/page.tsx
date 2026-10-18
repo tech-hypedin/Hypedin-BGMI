@@ -107,6 +107,7 @@ export default function MissionsPage() {
         queryKey: ['active-missions'],
         queryFn: async () => {
             const { data } = await api.get('/api/ambassador/getMissions');
+            console.log(data);
             return {
                 tasks: data.tasks || [],
                 submittedTasks: data.submittedTasks || [] 
