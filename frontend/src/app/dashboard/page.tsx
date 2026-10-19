@@ -707,8 +707,8 @@ const SEASONS_CONFIG: SeasonConfig[] = [
     },
     {
         number: 3,
-        startDate: '2026-10-20T00:00:00+05:30',
-        endDate: '2026-11-06T23:59:00',
+        startDate: '2026-10-22T00:00:00+05:30',
+        endDate: '2026-11-22T23:59:00',
         maxRpThreshold: 10000,
     },
 ];
