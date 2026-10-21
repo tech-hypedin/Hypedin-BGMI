@@ -805,6 +805,10 @@ const submitSpecificTask = async (req: AuthRequest, res: Response) => {
         const now = new Date();
         let period = 'once';
 
+        if (task.status === "Completed") {
+            return res.status(400).json({ success: false, message: "DEADLINE REACHED" });
+        }
+
         if (task.taskType === 'Daily') {
             period = now.toISOString().split('T')[0];
         } 
