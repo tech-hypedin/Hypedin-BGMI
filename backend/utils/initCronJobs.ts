@@ -241,6 +241,28 @@ const seperateSeason2RP = async () => {
     }
 }
 
+const separateSeason2XP = async () => {
+    try {
+        const ambassadors = await Ambassadors.find({});
+
+        let count = 0;
+
+        if (ambassadors.length > 0) {
+            for (let ambassador of ambassadors) {
+                if (ambassador.season1XP === 0) {
+                    ambassador.season2XP = ambassador.XP;
+                } else {
+                    ambassador.season2XP = ambassador.XP - ambassador.season1XP;
+                }
+                await ambassador.save();
+                count++;
+            }
+        }
+    } catch(error: unknown) {
+        console.log(error);
+    }
+}
+
 // --- INITIALIZATION ENGINE ---
 export const initCronJobs = () => {
     console.log('--- CRON SYSTEM INITIALIZED ---');
@@ -260,11 +282,17 @@ export const initCronJobs = () => {
         await syncRPLeaderboard();
     });
 
-    const task = cron.schedule("0 * * * *", async () => {
-        console.log("--- SEPARATION OF SEASON 2 RP IS RUNNING ---");
-        task.stop();
-        await seperateSeason2RP();
-    });
+    // const task = cron.schedule("0 * * * *", async () => {
+    //     console.log("--- SEPARATION OF SEASON 2 RP IS RUNNING ---");
+    //     task.stop();
+    //     await seperateSeason2RP();
+    // });
+
+    // const taskXP = cron.schedule("0 * * * *", async () => {
+    //     console.log("--- SEPARATION OF SEASON 2 RP IS RUNNING ---");
+    //     taskXP.stop();
+    //     await separateSeason2XP();
+    // });
 
     // cron.schedule(('*/15 * * * *'), async () => {
     //     console.log("--- CHECKING FOR MAX RP ---");
