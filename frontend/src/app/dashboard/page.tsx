@@ -290,7 +290,7 @@ export default function AmbassadorDashboard() {
 
     if (selectedSeasonStatus === 'completed') {
         if (selectedSeason === 1) currentRP = ambassador.season1RP || 0;
-        if (selectedSeason === 2) currentRP = ambassador.season2RP || 0;
+        // if (selectedSeason === 2) currentRP = ambassador.season2RP || 0;
         if (selectedSeason === 3) currentRP = ambassador.season3RP || 0;
     }
 
