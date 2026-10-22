@@ -298,7 +298,7 @@ export default function AmbassadorDashboard() {
 
     if (selectedSeasonStatus === 'completed') {
         if (selectedSeason === 1) currentXP = ambassador.season1XP || 0;
-        if (selectedSeason === 2) currentXP = ambassador.season2XP || 0;
+        //if (selectedSeason === 2) currentXP = ambassador.season2XP || 0;
         if (selectedSeason === 3) currentXP = ambassador.season3XP || 0;
     }
 
