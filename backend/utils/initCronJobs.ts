@@ -310,11 +310,11 @@ export const initCronJobs = () => {
         await syncRPLeaderboard();
     });
 
-    const task = cron.schedule("0 * * * *", async () => {
-        console.log("--- SEPARATION OF SEASON 2 RP IS RUNNING ---");
-        task.stop();
-        await seperateSeason2RP();
-    });
+    // const task = cron.schedule("0 * * * *", async () => {
+    //     console.log("--- SEPARATION OF SEASON 2 RP IS RUNNING ---");
+    //     task.stop();
+    //     await seperateSeason2RP();
+    // });
 
     // const taskXP = cron.schedule("0 * * * *", async () => {
     //     console.log("--- SEPARATION OF SEASON 2 RP IS RUNNING ---");
