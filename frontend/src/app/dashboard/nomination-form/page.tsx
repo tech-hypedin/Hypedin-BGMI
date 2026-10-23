@@ -138,7 +138,7 @@ export default function ApplicationPage() {
     React.useEffect(() => {
         const fetchNominations = async () => {
             try {
-                const { data } = await api.get('/api/nomination/checkNomination?season=2');
+                const { data } = await api.get('/api/nomination/checkNomination?season=3');
     
                 if (data?.isNominationExists) {
                     setSubmitted(true);
