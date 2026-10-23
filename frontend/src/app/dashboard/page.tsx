@@ -339,7 +339,7 @@ export default function AmbassadorDashboard() {
                             <img src={badgeSectionIcon.src} alt='Badges' className='h-3.5 w-3.5 object-contain' />
                             <span className='text-sm sm:text-md font-bold uppercase tracking-widest text-white group-hover:text-[#f4c430]'>Badges</span>
                         </button>
-                        { selectedSeason === 2 &&
+                        { selectedSeason === 3 &&
                         <a
                             href='/SOP_BGMI_CAMPUS_MVP_Program.pdf'
                             download
