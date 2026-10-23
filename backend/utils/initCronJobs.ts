@@ -225,7 +225,7 @@ const seperateSeason2RP = async () => {
                     ambassador.season2RP = ambassador.RP;
                 } else {
                     const deductedRPOfSeason1 = (ambassador.season1RP * 15) / 100;
-                    const season1RPAfterdeduction = ambassador.season1RP - deductedRPOfSeason1;
+                    const season1RPAfterdeduction = Math.round(ambassador.season1RP - deductedRPOfSeason1);
                     ambassador.season2RP = ambassador.RP - season1RPAfterdeduction;
                 }
                 await ambassador.save();
@@ -263,6 +263,34 @@ const separateSeason2XP = async () => {
     }
 }
 
+const deductRPInSeason2 = async () => {
+    try {
+        const ambassadors = await Ambassadors.find({});
+
+        let count = 0;
+
+        if (ambassadors.length > 0) {
+            for (let ambassador of ambassadors) {
+                if (ambassador.RP >= 4000) {
+                    const rpToDeduct = Math.round((ambassador.RP * 20) / 100);
+                    ambassador.RP = ambassador.RP - rpToDeduct;
+                } else {
+                    const rpToDeduct = Math.round((ambassador.RP * 10) / 100);
+                    ambassador.RP = ambassador.RP - rpToDeduct;
+                }
+                await ambassador.save();
+                count++;
+            }
+        }
+
+        if (count === ambassadors.length) {
+            console.log("RP DEDUCTION SUCCESSFULL FOR EVERY AMBASSADOR");
+        }
+    } catch(error: unknown) {
+        console.log(error);
+    }
+}
+
 // --- INITIALIZATION ENGINE ---
 export const initCronJobs = () => {
     console.log('--- CRON SYSTEM INITIALIZED ---');
@@ -282,11 +310,11 @@ export const initCronJobs = () => {
         await syncRPLeaderboard();
     });
 
-    // const task = cron.schedule("0 * * * *", async () => {
-    //     console.log("--- SEPARATION OF SEASON 2 RP IS RUNNING ---");
-    //     task.stop();
-    //     await seperateSeason2RP();
-    // });
+    const task = cron.schedule("0 * * * *", async () => {
+        console.log("--- SEPARATION OF SEASON 2 RP IS RUNNING ---");
+        task.stop();
+        await seperateSeason2RP();
+    });
 
     // const taskXP = cron.schedule("0 * * * *", async () => {
     //     console.log("--- SEPARATION OF SEASON 2 RP IS RUNNING ---");
