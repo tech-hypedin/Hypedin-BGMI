@@ -600,7 +600,7 @@ const registerPlayer = async (req: AuthRequest, res: Response) => {
             MVPUID: ambassador.UID,
             idCardImage: proofUrls,
             cohort: 'Cohort-1',
-            signupSeason: 'Season-2'
+            signupSeason: 'Season-3'
         });
 
         const MVP_ID = ambassador._id.toString();
@@ -615,10 +615,10 @@ const registerPlayer = async (req: AuthRequest, res: Response) => {
             ambassador.UID,
             urls,
             MVP_ID,
-            'Season-2'
+            'Season-3'
         ]];
 
-        await appendPlayerToGoogleSheets(process.env.TASK_GSHEET!, 'Cohort Signups Season 2', sheetsData);
+        await appendPlayerToGoogleSheets(process.env.TASK_GSHEET!, 'Cohort Signups Season 3', sheetsData);
 
         return res.status(200).json({ success: true, message: 'PLAYER REGISTERED' });
     } catch(error: unknown) {
