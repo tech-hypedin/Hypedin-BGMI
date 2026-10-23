@@ -125,7 +125,7 @@ const reviewSubmission = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, message: 'MISSION ALREADY PROCESSED' });
         }
 
-        const result = await updateGoogleSheetsColumnI(sheetId, 'Submission Log Season 3!A:A', subId, status);
+        const result = await updateGoogleSheetsColumnI(sheetId, 'Submission Log Season 3', subId, status);
 
         if (!result) {
             throw new Error("SHEET UPDATION FAILED");
