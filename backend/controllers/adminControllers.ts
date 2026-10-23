@@ -271,4 +271,16 @@ const donnateCustomRP = async (req: Request, res: Response) => {
     }
 }
 
-export { createTask, getTasksByStatus, getRewardInventory, createReward, reviewSubmission, getSubmission, getLeaderboard, deleteTask, getTasks, donnateCustomRP }
+const getAmbassadors = async (req: Request, res: Response) => {
+    try {
+        const ambassadors = await Ambassadors.find({});
+
+        return res.status(200).json({ success: true, ambassadors, message: "Ambassadors fetched" });
+    } catch(error: unknown) {
+        console.log(error);
+
+        res.status(500).json({ success: false, message: "INTERNAL SERVER ERROR" });
+    }
+}
+
+export { createTask, getTasksByStatus, getRewardInventory, createReward, reviewSubmission, getSubmission, getLeaderboard, deleteTask, getTasks, donnateCustomRP, getAmbassadors }

@@ -27,7 +27,8 @@ const navItems = [
     { label: 'Community', href: '/admin/community', icon: Users, section: 'SECONDARY' },
     { label: 'Rewards', href: '/admin/rewards', icon: Gift, section: 'SECONDARY' },
     { label: 'Set Rewards', href: '/admin/createRewards', icon: PlusSquare, section: 'SECONDARY' },
-    { label: 'Leader Board', href: '/admin/leaderboard', icon: Trophy, section: 'SECONDARY' }
+    { label: 'Leader Board', href: '/admin/leaderboard', icon: Trophy, section: 'SECONDARY' },
+    { label: 'Custom RP', href: '/admin/customRP', icon: Trophy, section: 'SECONDARY' }
 ]
 
 export function Sidebar({ isCollapsed, onToggle, isMobileOpen, setIsMobileOpen }: SidebarProps) {
