@@ -928,7 +928,7 @@ function MissionDetailModal({ task, actionState, isRequesting, onClose, onDeploy
                                 </h4>
                                 { task.title !== "Booster Task - Welcome Kit Unboxing Reel" &&
                                     <a
-                                        href={task.title.includes('TDM / WOW BATTLEGROUND') ? '/Task_1_Submission_Guidelines.pdf' : task.title.includes('CAPTURE THE CLUTCH') ? '/Task_2_Submission_Guidelines.pdf' : task.title.includes('OFFLINE ACTIVATION') ? '/Task_3_Submission_Guidelines.pdf' : task.title.includes('FLEX') ? '/FLEX_Booster.pdf' : '/Squad_Signup_Booster.pdf' }
+                                        href={task.title.includes('Recruit the Squad') ? '/Recruit_The_Squad_Submission_Guidelines.pdf' : task.title.includes('CAPTURE THE CLUTCH') ? '/Task_2_Submission_Guidelines.pdf' : task.title.includes('OFFLINE ACTIVATION') ? '/Task_3_Submission_Guidelines.pdf' : task.title.includes('FLEX') ? '/FLEX_Booster.pdf' : '/Squad_Signup_Booster.pdf' }
                                         download
                                         className='flex items-center gap-1.5 bg-zinc-900/60 border border-zinc-800 hover:border-[#f4c430] px-3 py-1.5 text-xs font-bold text-zinc-400 hover:text-white transition-colors uppercase tracking-wider cursor-pointer whitespace-nowrap font-["Teko","Oswald",sans-serif]'
                                     >
