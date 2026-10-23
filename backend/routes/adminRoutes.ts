@@ -4,7 +4,7 @@ const router = express.Router();
 
 import authRole from '../middleware/authRole.js';
 import authMiddleware from '../middleware/authMiddleware.js';
-import { createTask, getTasksByStatus, getRewardInventory, createReward, reviewSubmission, getSubmission, getLeaderboard, deleteTask, getTasks } from '../controllers/adminControllers.js';
+import { createTask, getTasksByStatus, getRewardInventory, createReward, reviewSubmission, getSubmission, getLeaderboard, deleteTask, getTasks, donnateCustomRP } from '../controllers/adminControllers.js';
 
 router.get('/rewards', authMiddleware, authRole('Admin'), getRewardInventory);
 router.get('/tasks', authMiddleware, authRole('Admin'), getTasks);
@@ -15,5 +15,6 @@ router.post('/rewards', authMiddleware, authRole('Admin'), createReward);
 router.post('/task', authMiddleware, authRole('Admin'), createTask);
 router.delete('/task/:taskId', authMiddleware, authRole('Admin'), deleteTask);
 router.post('/submissions', authMiddleware, authRole('Admin'), reviewSubmission);
+router.post('/customRP', authMiddleware, authRole('Admin'), donnateCustomRP);
 
 export default router;

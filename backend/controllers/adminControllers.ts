@@ -125,7 +125,7 @@ const reviewSubmission = async (req: Request, res: Response) => {
 
         if (status === 'Approved') {
             const taskReward = (submission.taskId as any)?.rpReward || 0;
-            const MAX_RP_THRESHOLD = 6000;
+            const MAX_RP_THRESHOLD = 10500;
 
             const ambassador = await Ambassadors.findById(submission.ambassadorId);
 
@@ -228,4 +228,47 @@ const deleteTask = async (req: Request, res: Response) => {
     }
 }
 
-export { createTask, getTasksByStatus, getRewardInventory, createReward, reviewSubmission, getSubmission, getLeaderboard, deleteTask, getTasks }
+const donnateCustomRP = async (req: Request, res: Response) => {
+    try {
+        const { customRP, ambassadorId } = req.body;
+
+        if (!customRP) {
+            return res.status(400).json({ success: false, message: "RP NOT FOUND" });
+        }
+        if (!ambassadorId) {
+            return res.status(400).json({ success: false, message: "AMBASSADOR ID NOT FOUND" });
+        }
+
+        const ambassador = await Ambassadors.findById(ambassadorId);
+
+        if (!ambassador) {
+            return res.status(400).json({ success: false, message: "AMBASSADOR NOT FOUND" });
+        }
+
+        const MAX_RP_THRESHOLD = 10500;
+
+        const isSpaceRemaining: boolean = (ambassador.RP + customRP) < MAX_RP_THRESHOLD;
+
+        if (isSpaceRemaining) {
+            ambassador.RP = ambassador.RP + customRP;
+        } else {
+            if (ambassador.RP < MAX_RP_THRESHOLD) {
+                const rpToDedicate = MAX_RP_THRESHOLD - ambassador.RP;
+                ambassador.RP = rpToDedicate;
+                ambassador.XP = customRP - rpToDedicate;
+            } else {
+                ambassador.XP = customRP;
+            }
+        }
+
+        await ambassador.save();
+
+        return res.status(200).json({ success: true, message: "RP SUCCESSFULLY DEDICATED" });
+    } catch(error: unknown) {
+        console.log(error);
+
+        res.status(500).json({ success: false, message: "INTERNAL SERVER ERROR" });
+    }
+}
+
+export { createTask, getTasksByStatus, getRewardInventory, createReward, reviewSubmission, getSubmission, getLeaderboard, deleteTask, getTasks, donnateCustomRP }
