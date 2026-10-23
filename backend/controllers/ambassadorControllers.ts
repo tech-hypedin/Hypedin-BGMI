@@ -254,7 +254,7 @@ const submitTaskIntel = async (req: Request, res: Response) => {
             submissionPeriod: period 
         });
 
-        if (isTaskSubmitted && task.title !== "Capture the Clutch") {
+        if (isTaskSubmitted && task.title !== "Capture the Clutch" && isTaskSubmitted.status !== "Rejected") {
             return res.status(400).json({ success: false, message: `WINDOW CLOSED: YOU HAVE ALREADY SUBMITTED FOR THIS ${task.taskType.toUpperCase()} PERIOD.` });
         }
 
