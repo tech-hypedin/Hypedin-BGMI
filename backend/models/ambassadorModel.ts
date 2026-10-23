@@ -72,7 +72,7 @@ ambassadorSchema.pre('save', function() {
         Diamond: 4000,
         Crown: 6000,
         Ace: 8500,
-        Conqueror: 15000
+        Conqueror: 10500
     }
 
     if (this.isModified('rank')) {
