@@ -140,21 +140,16 @@ export const updateGoogleSheetsColumnI = async (
     sheetName: string,
     searchValue: string,
     columnIValue: any
-) => {
+): Promise<boolean> => {
     try {
         if (!initialized) {
             initializeSheets();
         }
 
-        if (!spreadsheetId) {
-            throw new Error('[GOOGLE SHEETS] spreadsheetId is required');
+        if (!spreadsheetId || !searchValue) {
+            return false;
         }
 
-        if (!searchValue) {
-            throw new Error('[GOOGLE SHEETS] searchValue is required');
-        }
-
-        // Fetch column D values
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId,
             range: `'${sheetName}'!D:D`,
@@ -162,21 +157,17 @@ export const updateGoogleSheetsColumnI = async (
 
         const rows = response.data.values || [];
 
-        // Find the matching row
         const rowIndex = rows.findIndex(
             (row: any) => row[0]?.toString() === searchValue.toString()
         );
 
         if (rowIndex === -1) {
-            throw new Error(
-                `[GOOGLE SHEETS] No row found with column D value: ${searchValue}`
-            );
+            return false;
         }
 
         const sheetRow = rowIndex + 1;
 
-        // Update only column I
-        const updateResponse = await sheets.spreadsheets.values.update({
+        await sheets.spreadsheets.values.update({
             spreadsheetId,
             range: `'${sheetName}'!I${sheetRow}`,
             valueInputOption: 'USER_ENTERED',
@@ -185,17 +176,13 @@ export const updateGoogleSheetsColumnI = async (
             },
         });
 
-        console.log(
-            `[GOOGLE SHEETS] Updated column I for row ${sheetRow}`
-        );
-
-        return updateResponse.data;
+        return true;
     } catch (err: any) {
         console.error(
             '[GOOGLE SHEETS] ❌ Error updating column I:',
             err.message
         );
-        throw err;
+        return false;
     }
 };
 
