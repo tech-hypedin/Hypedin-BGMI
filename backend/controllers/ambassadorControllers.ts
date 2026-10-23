@@ -8,7 +8,7 @@ import Ambassadors from '../models/ambassadorModel.js';
 import Submissions from '../models/submissionsModel.js';
 
 import { drive } from '../utils/googleDrive.js';
-import { appendToGoogleSheets } from '../utils/sheetsTracker.js';
+import { appendToGoogleSheets, updateGoogleSheetsByColumnD } from '../utils/sheetsTracker.js';
 
 import type { Request, Response } from 'express';
 import { appendPlayerToGoogleSheets } from '../utils/sheetsTracker.js';
@@ -193,14 +193,14 @@ const submitTaskIntel = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, message: "LINK ALREADY EXISTS" });
         }
 
-        const hasSubmittedClutchDiaries = await Submissions.findOne({ taskId: '6ac0d9bfc6e5c085e2ee3e9f', ambassadorId: ambassador._id });
+        // const hasSubmittedClutchDiaries = await Submissions.findOne({ taskId: '6ac0d9bfc6e5c085e2ee3e9f', ambassadorId: ambassador._id });
 
-        if (hasSubmittedClutchDiaries) {
-            const isExists = hasSubmittedClutchDiaries.proofUrls.some(link => proofUrls.includes(link));
-            if (isExists) {
-                return res.status(400).json({ success: false, message: "THE LINK HAS ALREADY BEEN SUBMITTED IN CLUTCH DIARIES" });
-            }
-        }
+        // if (hasSubmittedClutchDiaries) {
+        //     const isExists = hasSubmittedClutchDiaries.proofUrls.some(link => proofUrls.includes(link));
+        //     if (isExists) {
+        //         return res.status(400).json({ success: false, message: "THE LINK HAS ALREADY BEEN SUBMITTED IN CLUTCH DIARIES" });
+        //     }
+        // }
 
         if (taskId === "6a9c16f3093c4e366e2e623f") {
             const [result] = await Submissions.aggregate([
@@ -296,28 +296,37 @@ const submitTaskIntel = async (req: Request, res: Response) => {
             }
         }
 
-        const submission = await Submissions.create({
-            taskId,
-            ambassadorId: dossier._id,
-            proofUrls,
-            remarks,
-            submissionPeriod: period
-        });
-
+        let submission;
         const urls = proofUrls.join(', ');
 
-        const sheetData = [[
-            new Date().toLocaleString(),
-            userId,
-            dossier._id,
-            submission._id,
-            task.title,
-            dossier.IGN,
-            dossier.UID,
-            urls,
-        ]]
+        if (isTaskSubmitted && isTaskSubmitted.status === "Rejected") {
+            isTaskSubmitted.status = "ReSubmitted";
+            await isTaskSubmitted.save();
 
-        await appendToGoogleSheets(process.env.TASK_GSHEET!, 'Submission Log Season 3!A:A', sheetData);
+            await updateGoogleSheetsByColumnD(process.env.TASK_GSHEET!, 'Submission Log Season 3!A:A', isTaskSubmitted._id.toString(), urls, isTaskSubmitted.status);
+        } else {
+            submission = await Submissions.create({
+                taskId,
+                ambassadorId: dossier._id,
+                proofUrls,
+                remarks,
+                submissionPeriod: period
+            });
+
+            const sheetData = [[
+                new Date().toLocaleString(),
+                userId,
+                dossier._id,
+                submission._id,
+                task.title,
+                dossier.IGN,
+                dossier.UID,
+                urls,
+                'Pending'
+            ]];
+
+            await appendToGoogleSheets(process.env.TASK_GSHEET!, 'Submission Log Season 3!A:A', sheetData);
+        }
 
         res.status(201).json({ success: true, message: 'INTEL UPLOADED', submission });
         

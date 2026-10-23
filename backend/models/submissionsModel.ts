@@ -5,7 +5,7 @@ interface ISubmission extends mongoose.Document {
     ambassadorId: mongoose.Types.ObjectId,
     proofUrls: string[],
     remarks?: string,
-    status: 'Pending' | 'Approved' | 'Rejected',
+    status: 'Pending' | 'Approved' | 'Rejected' | 'ReSubmitted',
     adminFeedback?: string,
     reviewedBy?: mongoose.Types.ObjectId,
     submissionPeriod: string
@@ -38,7 +38,7 @@ const submissionSchema = new mongoose.Schema({
         unique: true
     },
     remarks: { type: String },
-    status: { type: String, enum: ['Pending', 'Approved', 'Rejected'], default: 'Pending', index: true },
+    status: { type: String, enum: ['Pending', 'Approved', 'Rejected', 'ReSubmitted'], default: 'Pending', index: true },
     adminFeedback: { type: String },
     reviewedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     submissionPeriod: { type: String, required: true },

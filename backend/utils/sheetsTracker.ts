@@ -68,6 +68,73 @@ export const appendToGoogleSheets = async (spreadsheetId: string, range: string,
     }
 }
 
+
+export const updateGoogleSheetsByColumnD = async (
+    spreadsheetId: string,
+    sheetName: string,
+    searchValue: string,
+    columnHValue: any,
+    columnIValue: any
+) => {
+    try {
+        if (!initialized) {
+            initializeSheets();
+        }
+
+        if (!spreadsheetId) {
+            throw new Error('[GOOGLE SHEETS] spreadsheetId is required');
+        }
+
+        if (!searchValue) {
+            throw new Error('[GOOGLE SHEETS] searchValue is required');
+        }
+
+        // Fetch column D values
+        const response = await sheets.spreadsheets.values.get({
+            spreadsheetId,
+            range: `'${sheetName}'!D:D`,
+        });
+
+        const rows = response.data.values || [];
+
+        // Find the row matching the value in column D
+        const rowIndex = rows.findIndex(
+            (row: any) => row[0]?.toString() === searchValue.toString()
+        );
+
+        if (rowIndex === -1) {
+            throw new Error(
+                `[GOOGLE SHEETS] No row found with column D value: ${searchValue}`
+            );
+        }
+
+        // Google Sheets rows are 1-indexed
+        const sheetRow = rowIndex + 1;
+
+        // Update columns H and I
+        const updateResponse = await sheets.spreadsheets.values.update({
+            spreadsheetId,
+            range: `'${sheetName}'!H${sheetRow}:I${sheetRow}`,
+            valueInputOption: 'USER_ENTERED',
+            requestBody: {
+                values: [[columnHValue, columnIValue]],
+            },
+        });
+
+        console.log(
+            `[GOOGLE SHEETS] Updated columns H and I for row ${sheetRow}`
+        );
+
+        return updateResponse.data;
+    } catch (err: any) {
+        console.error(
+            '[GOOGLE SHEETS] ❌ Error updating data:',
+            err.message
+        );
+        throw err;
+    }
+};
+
 export const appendToGoogleSheetsForContactForm = async (spreadsheetId: string, range: string, values: any[][]) => {
     try {
         if (!initialized) {
