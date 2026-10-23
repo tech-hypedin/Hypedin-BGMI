@@ -159,7 +159,7 @@ export function Sidebar({ isCollapsed, onToggle, isMobileOpen, setIsMobileOpen }
             </div>
 
             {/* Bonus WOW Challenge Sector */}
-            <div className='space-y-1.5 pt-2 font-["Teko",_"Oswald",_sans-serif]'>
+            {/* <div className='space-y-1.5 pt-2 font-["Teko",_"Oswald",_sans-serif]'>
               {(!isCollapsed || isMobileOpen) && (
                 <div className='flex items-center gap-2 px-4 mb-3 font-["Teko",_"Oswald",_sans-serif]'>
                   <span className='w-1 h-2.5 bg-amber-500 block' />
@@ -169,7 +169,7 @@ export function Sidebar({ isCollapsed, onToggle, isMobileOpen, setIsMobileOpen }
               {navItems.filter(i => i.section === 'BONUS WOW CHALLENGE').map((item) => (
                 <SidebarItem key={`bonus-${item.href}`} {...item} isCollapsed={isCollapsed && !isMobileOpen} active={pathname === item.href} />
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Bottom Controls */}
