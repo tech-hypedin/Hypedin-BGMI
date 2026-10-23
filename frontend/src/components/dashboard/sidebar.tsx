@@ -29,8 +29,8 @@ const navItems = [
   { label: 'Your Cohort', href: '/dashboard/cohort', icon: Users, section: 'SECONDARY' },
   { label: 'Nominate a Player', href: '/dashboard/nomination-form', icon: ArrowBigUpDashIcon, section: 'SECONDARY' },
   { label: 'Profile', href: '/dashboard/profile', icon: User, section: 'SECONDARY' },
-  { label: 'Missions', href: '/dashboard/specificMissions', icon: Target, section: 'BONUS WOW CHALLENGE' },
-  { label: 'Leaderboard', href: '/dashboard/leaderboardForSpecificTask', icon: Trophy, section: 'BONUS WOW CHALLENGE' }
+  // { label: 'Missions', href: '/dashboard/specificMissions', icon: Target, section: 'BONUS WOW CHALLENGE' },
+  // { label: 'Leaderboard', href: '/dashboard/leaderboardForSpecificTask', icon: Trophy, section: 'BONUS WOW CHALLENGE' }
 ]
 
 export function Sidebar({ isCollapsed, onToggle, isMobileOpen, setIsMobileOpen }: SidebarProps) {
