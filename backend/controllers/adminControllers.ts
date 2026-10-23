@@ -4,6 +4,7 @@ import Submissions from '../models/submissionsModel.js';
 import Ambassadors from '../models/ambassadorModel.js';
 
 import type { Request, Response } from 'express';
+import { updateGoogleSheetsColumnI } from '../utils/sheetsTracker.js';
 
 const createTask = async (req: Request, res: Response) => {
     try {
@@ -108,6 +109,12 @@ const reviewSubmission = async (req: Request, res: Response) => {
         const { subId, status, adminFeedback } = req.body; 
         const adminId = (req as any).userId;
 
+        const sheetId = process.env.TASK_GSHEET;
+
+        if (!sheetId) {
+            throw new Error('SHEET NOT FOUND');
+        }
+
         const submission = await Submissions.findById(subId).populate('taskId');
 
         if (!submission) {
@@ -150,6 +157,8 @@ const reviewSubmission = async (req: Request, res: Response) => {
                 await ambassador.save(); 
             }
         }
+
+        await updateGoogleSheetsColumnI(sheetId, 'Submission Log Season 3!A:A', subId, status);
 
         return res.status(200).json({ success: true, message: `MISSION ${status.toUpperCase()} SUCCESSFULLY` });
     } catch (err: unknown) {
