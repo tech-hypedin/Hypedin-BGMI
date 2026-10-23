@@ -317,7 +317,7 @@ const submitTaskIntel = async (req: Request, res: Response) => {
             urls,
         ]]
 
-        await appendToGoogleSheets(process.env.TASK_GSHEET!, 'Submission Log Season 2!A:A', sheetData);
+        await appendToGoogleSheets(process.env.TASK_GSHEET!, 'Submission Log Season 3!A', sheetData);
 
         res.status(201).json({ success: true, message: 'INTEL UPLOADED', submission });
         
