@@ -303,7 +303,7 @@ const submitTaskIntel = async (req: Request, res: Response) => {
             isTaskSubmitted.status = "ReSubmitted";
             await isTaskSubmitted.save();
 
-            await updateGoogleSheetsByColumnD(process.env.TASK_GSHEET!, 'Submission Log Season 3!A:A', isTaskSubmitted._id.toString(), urls, isTaskSubmitted.status);
+            await updateGoogleSheetsByColumnD(process.env.TASK_GSHEET!, 'Submission Log Season 3', isTaskSubmitted._id.toString(), urls, isTaskSubmitted.status);
         } else {
             submission = await Submissions.create({
                 taskId,
