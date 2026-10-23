@@ -103,7 +103,7 @@ const nominatePlayer = async (req: Request, res: Response) => {
             URLs
         ]];
 
-        await appendToGoogleSheets(process.env.NOMINATIONS_SHEET_ID!, 'Season 2!A1', sheetData);
+        await appendToGoogleSheets(process.env.NOMINATIONS_SHEET_ID!, 'Season 3!A1', sheetData);
 
         return res.status(200).json({ success: true, message: "PLAYER SUCCESSFULLY NOMINATED" });
     } catch(error: unknown) {
