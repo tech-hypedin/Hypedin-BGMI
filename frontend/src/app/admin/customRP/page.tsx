@@ -37,7 +37,7 @@ export default function AmbassadorsPage() {
     const { data: ambassadors, isLoading, isError, error } = useQuery({
         queryKey: ['ambassadors'],
         queryFn: async () => {
-            const { data } = await api.get<GetAmbassadorsResponse>('/getAmbassadors');
+            const { data } = await api.get<GetAmbassadorsResponse>('/api/admin/getAmbassadors');
             if (!data.success) throw new Error(data.message || 'Failed to fetch ambassadors');
             return data.ambassadors;
         },
@@ -256,7 +256,7 @@ function CustomRPModal({ ambassador, onClose }: { ambassador: Ambassador; onClos
         setErrorMessage('');
 
         try {
-            const { data } = await api.put<CustomRPResponse>('/customRP', {
+            const { data } = await api.put<CustomRPResponse>('/api/admin/customRP', {
                 customRP: Number(customRP),
                 ambassadorId: ambassador._id,
             });
