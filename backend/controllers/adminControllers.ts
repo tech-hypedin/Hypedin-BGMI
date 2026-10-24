@@ -56,6 +56,8 @@ const getTasksByStatus = async (req: Request, res: Response) => {
         if (tab === 'Re Submissions') {
             const submissions = await Submissions.find({ status: 'ReSubmitted' }).populate('ambassadorId', 'rank IGN').populate('taskId', 'title rpReward phase');
 
+            console.log(submissions);
+
             return res.status(200).json({ success: true, tasks: submissions });
         }
 
