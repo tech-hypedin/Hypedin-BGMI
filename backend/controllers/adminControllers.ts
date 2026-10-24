@@ -127,7 +127,7 @@ const reviewSubmission = async (req: Request, res: Response) => {
             return res.status(404).json({ success: false, message: 'INTEL NOT FOUND' });
         }
 
-        if (submission.status !== 'Pending') {
+        if (submission.status === 'Approved' || submission.status === 'Rejected') {
             return res.status(400).json({ success: false, message: 'MISSION ALREADY PROCESSED' });
         }
 
