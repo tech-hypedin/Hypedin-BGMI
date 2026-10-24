@@ -299,7 +299,7 @@ const submitTaskIntel = async (req: Request, res: Response) => {
         let submission;
         const urls = proofUrls.join(', ');
 
-        if (isTaskSubmitted && isTaskSubmitted.status === "Rejected") {
+        if (isTaskSubmitted && isTaskSubmitted.status === "Rejected" && task.title !== "Capture the Clutch") {
             isTaskSubmitted.status = "ReSubmitted";
             await isTaskSubmitted.save();
 
