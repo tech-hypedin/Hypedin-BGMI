@@ -249,14 +249,36 @@ const separateSeason2XP = async () => {
 
         if (ambassadors.length > 0) {
             for (let ambassador of ambassadors) {
-                if (ambassador.season1XP === 0) {
-                    ambassador.season2XP = ambassador.XP;
-                } else {
-                    ambassador.season2XP = ambassador.XP - ambassador.season1XP;
-                }
+                ambassador.season2XP = ambassador.XP;
                 await ambassador.save();
                 count++;
             }
+        }
+
+        if (count === ambassadors.length) {
+            console.log("SEPARATION OF XP HAS BEEN DONE");
+        }
+    } catch(error: unknown) {
+        console.log(error);
+    }
+}
+
+const refactorXP = async () => {
+    try {
+        const ambassadors = await Ambassadors.find({});
+
+        let count = 0;
+
+        if (ambassadors.length > 0) {
+            for (let ambassador of ambassadors) {
+                ambassador.XP = ambassador.XP + ambassador.season1XP;
+                await ambassador.save();
+                count++;
+            }
+        }
+
+        if (count === ambassadors.length) {
+            console.log("REFACTOR OF XP HAS BEEN DONE");
         }
     } catch(error: unknown) {
         console.log(error);
@@ -316,11 +338,11 @@ export const initCronJobs = () => {
     //     await deductRPInSeason2();
     // });
 
-    // const taskXP = cron.schedule("0 * * * *", async () => {
-    //     console.log("--- SEPARATION OF SEASON 2 XP IS RUNNING ---");
-    //     taskXP.stop();
-    //     await separateSeason2XP();
-    // });
+    const taskXP = cron.schedule("0 * * * *", async () => {
+        console.log("--- SEPARATION OF SEASON 2 XP IS RUNNING ---");
+        taskXP.stop();
+        await separateSeason2XP();
+    });
 
     // cron.schedule(('*/15 * * * *'), async () => {
     //     console.log("--- CHECKING FOR MAX RP ---");
