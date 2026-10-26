@@ -316,11 +316,11 @@ export const initCronJobs = () => {
     //     await deductRPInSeason2();
     // });
 
-    // const taskXP = cron.schedule("0 * * * *", async () => {
-    //     console.log("--- SEPARATION OF SEASON 2 RP IS RUNNING ---");
-    //     taskXP.stop();
-    //     await separateSeason2XP();
-    // });
+    const taskXP = cron.schedule("0 * * * *", async () => {
+        console.log("--- SEPARATION OF SEASON 2 XP IS RUNNING ---");
+        taskXP.stop();
+        await separateSeason2XP();
+    });
 
     // cron.schedule(('*/15 * * * *'), async () => {
     //     console.log("--- CHECKING FOR MAX RP ---");
