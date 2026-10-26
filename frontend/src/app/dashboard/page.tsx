@@ -543,7 +543,7 @@ export default function AmbassadorDashboard() {
                             Missions
                         </h3>
                         <span className='text-[#f4c430] bg-[#f4c430]/10 border border-[#f4c430]/30 px-2 py-0.5 text-xs sm:text-[13px] font-bold uppercase tracking-wider'>
-                            {dbMissions.length} {selectedSeason === 2 ? "Active" : "Completed"}
+                            {dbMissions.length} {selectedSeason === 3 ? "Active" : "Completed"}
                         </span>
                     </div>
 
