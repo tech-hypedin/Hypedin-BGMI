@@ -199,7 +199,7 @@ if (!Array.isArray(proofUrls)) {
         // }
 
 
-        const isLinkExists = await Submissions.findOne({ ambassadorId: ambassador._id, proofUrls: { $in: proofUrls } });
+        const isLinkExists = await Submissions.findOne({ proofUrls: { $in: proofUrls } });
 
         if (isLinkExists) {
             return res.status(400).json({ success: false, message: "LINK ALREADY EXISTS" });
