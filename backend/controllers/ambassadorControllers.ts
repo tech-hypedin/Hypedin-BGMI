@@ -187,7 +187,7 @@ const submitTaskIntel = async (req: Request, res: Response) => {
         // }
 
 
-        const isLinkExists = await Submissions.findOne({ taskId, ambassadorId: ambassador._id, proofUrls: { $in: proofUrls } });
+        const isLinkExists = await Submissions.findOne({ ambassadorId: ambassador._id, proofUrls: { $in: proofUrls } });
 
         if (isLinkExists) {
             return res.status(400).json({ success: false, message: "LINK ALREADY EXISTS" });
