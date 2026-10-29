@@ -151,7 +151,7 @@ const submitTaskIntel = async (req: Request, res: Response) => {
         proofUrls = JSON.parse(proofUrls);
     } catch (e) {
         // Fallback: treat as a single string URL or comma-separated list
-        proofUrls = proofUrls.includes(',') ? proofUrls.split(',').map(s => s.trim()) : [proofUrls];
+        proofUrls = proofUrls.includes(',') ? proofUrls.split(',').map((s: any) => s.trim()) : [proofUrls];
     }
 }
 if (!Array.isArray(proofUrls)) {
