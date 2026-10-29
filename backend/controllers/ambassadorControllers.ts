@@ -301,6 +301,7 @@ const submitTaskIntel = async (req: Request, res: Response) => {
 
         if (isTaskSubmitted && isTaskSubmitted.status === "Rejected" && task.title !== "Capture the Clutch") {
             isTaskSubmitted.status = "ReSubmitted";
+            isTaskSubmitted.proofUrls = proofUrls;
             await isTaskSubmitted.save();
 
             await updateGoogleSheetsByColumnD(process.env.TASK_GSHEET!, 'Submission Log Season 3', isTaskSubmitted._id.toString(), urls, isTaskSubmitted.status);
