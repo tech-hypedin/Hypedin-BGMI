@@ -134,17 +134,29 @@ const submitTaskIntel = async (req: Request, res: Response) => {
         const userId = (req as any).userId;
         const files = req.files as Express.Multer.File[];
 
-        if (typeof proofUrls === 'string') {
-            try {
-                proofUrls = JSON.parse(proofUrls);
-            } catch (e) {
-                proofUrls = [];
-            }
-        }
+        // if (typeof proofUrls === 'string') {
+        //     try {
+        //         proofUrls = JSON.parse(proofUrls);
+        //     } catch (e) {
+        //         proofUrls = [];
+        //     }
+        // }
         
-        if (!Array.isArray(proofUrls)) {
-            proofUrls = [];
-        }
+        // if (!Array.isArray(proofUrls)) {
+        //     proofUrls = [];
+        // }
+
+        if (typeof proofUrls === 'string') {
+    try {
+        proofUrls = JSON.parse(proofUrls);
+    } catch (e) {
+        // Fallback: treat as a single string URL or comma-separated list
+        proofUrls = proofUrls.includes(',') ? proofUrls.split(',').map(s => s.trim()) : [proofUrls];
+    }
+}
+if (!Array.isArray(proofUrls)) {
+    proofUrls = proofUrls ? [proofUrls] : [];
+}
 
         const task = await Tasks.findById(taskId);
         if (!task) return res.status(404).json({ success: false, message: 'TASK DELETED' });
