@@ -541,8 +541,7 @@ const TWO_LINK_TASK_IDS = [
 
 /* ─── Tasks where the "ADD LINK" button is completely hidden ─── */
 const HIDE_ADD_LINK_TASK_IDS = [
-    '6a9c16f3093c4e366e2e623f',
-    '6a9c17bcf4853e9901eeee21'
+    '6ada5e962da30de8da222e18'
 ];
 
 const HIDE_ADD_LINK_TASK_TITLES = [
