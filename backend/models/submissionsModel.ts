@@ -40,7 +40,7 @@ const submissionSchema = new mongoose.Schema({
     },
     remarks: { type: String },
     status: { type: String, enum: ['Pending', 'Approved', 'Rejected', 'ReSubmitted'], default: 'Pending', index: true },
-    season: { type: Number, enum: ['1','2','3'], default: '3' },
+    season: { type: String, enum: ['1','2','3'], default: '3' },
     adminFeedback: { type: String },
     reviewedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     submissionPeriod: { type: String, required: true },
