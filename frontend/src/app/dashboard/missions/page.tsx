@@ -739,14 +739,12 @@ function MissionDetailModal({ task, actionState, onClose, onDeploy }: any) {
                     )}
 
                     <div className='grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 font-["Teko","Oswald",sans-serif]'>
+                        { task.title !== "Booster: KIARAA SHOWDOWN" &&
                         <div className='bg-black border border-zinc-900 p-4 leading-none'>
-                            { task.title !== "Booster: KIARAA SHOWDOWN" &&
-                            <span className='text-xs sm:text-sm text-zinc-500 block mb-1 tracking-wider uppercase font-["Teko","Oswald",sans-serif]'>RP Reward</span> }
-                            { task.title !== "Booster: KIARAA SHOWDOWN" &&
+                            <span className='text-xs sm:text-sm text-zinc-500 block mb-1 tracking-wider uppercase font-["Teko","Oswald",sans-serif]'>RP Reward</span>
                             <span className='text-xl sm:text-2xl text-primary font-bold font-["Teko","Oswald",sans-serif]'>+ {task.rpReward} RP</span>
-                            }
-                            
                         </div>
+                        }
                         <div className='bg-black border border-zinc-900 p-4 leading-none'>
                             <span className='text-xs sm:text-sm text-zinc-500 block mb-1 tracking-wider uppercase font-["Teko","Oswald",sans-serif]'>TASK TYPE</span>
                             <span className='text-xl sm:text-2xl font-bold text-white font-["Teko","Oswald",sans-serif]'>{task.taskType}</span>
