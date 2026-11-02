@@ -614,6 +614,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { Lock, Loader2, Info, Shield, Star, Check, X } from 'lucide-react';
 
@@ -930,13 +931,17 @@ export default function AmbassadorDashboard() {
             <SeasonBackdrop/>
 
             {/* Image Popup */}
-            {showPromo && (
+            {showPromo && typeof document !== 'undefined' && createPortal(
                 <div
                     className='fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-2 sm:p-4'
                     onClick={() => setShowPromo(false)}
                 >
                     <div
-                        className='relative flex h-[90vh] w-[92vw] items-center justify-center'
+                        className='relative'
+                        style={{
+                            aspectRatio: `${kiaraaImage.width} / ${kiaraaImage.height}`,
+                            width: `min(92vw, calc(85vh * ${kiaraaImage.width / kiaraaImage.height}))`,
+                        }}
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
@@ -949,10 +954,11 @@ export default function AmbassadorDashboard() {
                         <img
                             src={kiaraaImage.src}
                             alt='Kiaraa'
-                            className='h-full w-full rounded-sm object-contain'
+                            className='block h-full w-full rounded-sm object-contain'
                         />
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
 
             <div className='relative z-10 mx-auto max-w-6xl space-y-5 px-3 sm:px-6 lg:px-8 py-4 sm:py-6'>
