@@ -738,7 +738,7 @@ function MissionDetailModal({ task, actionState, onClose, onDeploy }: any) {
                         </div>
                     )}
 
-                    <div className='grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 font-["Teko","Oswald",sans-serif]'>
+                    {/* <div className='grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 font-["Teko","Oswald",sans-serif]'>
                         { task.title !== "Booster: KIARAA SHOWDOWN" &&
                         <div className='bg-black border border-zinc-900 p-4 leading-none'>
                             <span className='text-xs sm:text-sm text-zinc-500 block mb-1 tracking-wider uppercase font-["Teko","Oswald",sans-serif]'>RP Reward</span>
@@ -757,7 +757,32 @@ function MissionDetailModal({ task, actionState, onClose, onDeploy }: any) {
                                 } {task.isImageAllowed ? 'VISUAL PROOF (MAX 4)' : 'URL VALIDATION ONLY'}
                             </span>
                         </div>
-                    </div>
+                    </div> */}
+
+                    <div className={`grid grid-cols-1 ${task.title !== "Booster: KIARAA SHOWDOWN" ? "sm:grid-cols-3" : "sm:grid-cols-2 sm:max-w-2xl sm:mx-auto"} gap-3 sm:gap-4 font-["Teko","Oswald",sans-serif]`}>
+    {task.title !== "Booster: KIARAA SHOWDOWN" && (
+        <div className='bg-black border border-zinc-900 p-4 leading-none'>
+            <span className='text-xs sm:text-sm text-zinc-500 block mb-1 tracking-wider uppercase'>RP Reward</span>
+            <span className='text-xl sm:text-2xl text-primary font-bold'>+ {task.rpReward} RP</span>
+        </div>
+    )}
+
+    <div className='bg-black border border-zinc-900 p-4 leading-none'>
+        <span className='text-xs sm:text-sm text-zinc-500 block mb-1 tracking-wider uppercase'>TASK TYPE</span>
+        <span className='text-xl sm:text-2xl font-bold text-white'>{task.taskType}</span>
+    </div>
+
+    <div className='bg-black border border-zinc-900 p-4 leading-none'>
+        <span className='text-xs sm:text-sm text-zinc-500 block mb-1 tracking-wider uppercase'>VALIDATION METHOD</span>
+        <span className='text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-1.5'>
+            {task.isImageAllowed
+                ? <ImageIcon size={14} className='text-primary' />
+                : <Link size={14} className='text-primary' />
+            }
+            {task.isImageAllowed ? 'VISUAL PROOF (MAX 4)' : 'URL VALIDATION ONLY'}
+        </span>
+    </div>
+</div>
                 </div>
 
                 <button
