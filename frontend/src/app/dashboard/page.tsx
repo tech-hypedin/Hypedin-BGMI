@@ -1208,7 +1208,7 @@ export default function AmbassadorDashboard() {
                                         {m.title}
                                     </p>
                                 </div>
-                                <p className='text-[#f4c430] text-lg sm:text-xl font-bold'>+{m.rpReward} RP</p>
+                                {m.title !== "Booster: KIARAA SHOWDOWN" && <p className='text-[#f4c430] text-lg sm:text-xl font-bold'>+{m.rpReward} RP</p>}
                             </motion.div>
                         ))}
 
