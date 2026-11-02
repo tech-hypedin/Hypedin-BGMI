@@ -621,9 +621,11 @@ function MissionCard({ task, actionState, onViewDetails, onDeploy }: any) {
                     <span className={`px-2.5 py-0.5 text-xs sm:text-sm font-medium tracking-wide border leading-none ${statusColors[task.status] || 'border-zinc-800'}`}>
                         {task.status === 'In Progress' ? 'Live' : task.status}
                     </span>
+                    { task.title !== "Booster: KIARAA SHOWDOWN" &&
                     <span className='bg-primary/5 text-primary px-2.5 py-0.5 text-xs sm:text-sm font-medium tracking-wide border border-primary/20 leading-none'>
-                        {task.title !== "Booster: KIARAA SHOWDOWN" ? `+ ${task.rpReward} RP` : `${2000} UC`}
+                        + {task.rpReward} RP
                     </span>
+                    }
                     <span className='text-zinc-500 text-xs sm:text-sm font-light tracking-wide flex items-center gap-1 leading-none'>
                         <Clock size={11} /> {task.taskType}
                     </span>
@@ -738,8 +740,12 @@ function MissionDetailModal({ task, actionState, onClose, onDeploy }: any) {
 
                     <div className='grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 font-["Teko","Oswald",sans-serif]'>
                         <div className='bg-black border border-zinc-900 p-4 leading-none'>
-                            <span className='text-xs sm:text-sm text-zinc-500 block mb-1 tracking-wider uppercase font-["Teko","Oswald",sans-serif]'>{task.title !== "Booster: KIARAA SHOWDOWN" ? "RP" : "UC"} Reward</span>
-                            <span className='text-xl sm:text-2xl text-primary font-bold font-["Teko","Oswald",sans-serif]'>{task.title !== "Booster: KIARAA SHOWDOWN" ? "+" : ""} {task.title !== "Booster: KIARAA SHOWDOWN" ? task.rpReward : 2000} {task.title !== "Booster: KIARAA SHOWDOWN" ? "RP" : "UC"}</span>
+                            { task.title !== "Booster: KIARAA SHOWDOWN" &&
+                            <span className='text-xs sm:text-sm text-zinc-500 block mb-1 tracking-wider uppercase font-["Teko","Oswald",sans-serif]'>RP Reward</span> }
+                            { task.title !== "Booster: KIARAA SHOWDOWN" &&
+                            <span className='text-xl sm:text-2xl text-primary font-bold font-["Teko","Oswald",sans-serif]'>+ {task.rpReward} RP</span>
+                            }
+                            
                         </div>
                         <div className='bg-black border border-zinc-900 p-4 leading-none'>
                             <span className='text-xs sm:text-sm text-zinc-500 block mb-1 tracking-wider uppercase font-["Teko","Oswald",sans-serif]'>TASK TYPE</span>
