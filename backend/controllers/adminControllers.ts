@@ -46,7 +46,7 @@ const getTasksByStatus = async (req: Request, res: Response) => {
 
             const filteredAmbassadors = [...new Set(hasDedicatedBefore.map(submission => submission.ambassadorId.toString()))];
 
-            const submissions = await Submissions.find({ status: { $in: ['Pending', 'Rejected'] } }).populate('ambassadorId', 'rank IGN').populate('taskId', 'title rpReward phase');
+            const submissions = await Submissions.find({ status: { $in: ['Pending', 'Rejected'] } }).populate('ambassadorId', 'rank IGN').populate('taskId', 'title rpReward phase').sort({ createdAt: 1 });
 
             return res.status(200).json({ success: true, tasks: submissions, filteredAmbassadors });
         }
