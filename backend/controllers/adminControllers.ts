@@ -142,7 +142,7 @@ const reviewSubmission = async (req: Request, res: Response) => {
         }
 
         submission.status = status;
-        if ((submission.taskId as any)?.title === 'Capture The Clutch') {
+        if ((submission.taskId as any)?.title === 'Capture the Clutch') {
             const isSubmissionExistsForCaptureTheClutch = await Submissions.find({ ambassadorId: submission.ambassadorId, status: 'Approved', taskId: '6ada5e962da30de8da222e18' });
 
             if (isSubmissionExistsForCaptureTheClutch.length >= 2) {
