@@ -44,7 +44,7 @@ const getTasksByStatus = async (req: Request, res: Response) => {
         if(tab === 'In Review') {
             const hasDedicatedBefore = await Submissions.find({ taskId: '6ada5e962da30de8da222e18', status: 'Approved' });
 
-            const filteredAmbassadors = [...new Set(hasDedicatedBefore.map(submission => submission.ambassadorId.toString()))];
+            const filteredAmbassadors = hasDedicatedBefore.filter(submission => submission.ambassadorId).map(submission => submission.ambassadorId.toString());
 
             const submissions = await Submissions.find({ status: { $in: ['Pending', 'Rejected'] } }).populate('ambassadorId', 'rank IGN').populate('taskId', 'title rpReward phase').sort({ createdAt: 1 });
 
