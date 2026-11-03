@@ -426,7 +426,7 @@ export default function MissionsPage() {
                                                             {phase.name}
                                                         </h3>
                                                         <span className='text-xs sm:text-sm text-zinc-400 tracking-widest font-light'>
-                                                            [{phase.id === 1 ? '03 AUG - 03 SEPT' : phase.id === 2 ? '05 SEPT - 15 OCT' : 'TO BE DECLARED '}]
+                                                            [{phase.id === 1 ? '03 AUG - 03 SEPT' : phase.id === 2 ? '05 SEPT - 18 OCT' : '23 OCT - 25 NOV'}]
                                                         </span>
                                                     </div>
                                                     <div>
