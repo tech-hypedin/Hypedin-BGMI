@@ -142,7 +142,17 @@ const reviewSubmission = async (req: Request, res: Response) => {
         }
 
         submission.status = status;
-        submission.adminFeedback = adminFeedback || 'No feedback provided.';
+        if ((submission.taskId as any)?.title === 'Capture The Clutch') {
+            const isSubmissionExistsForCaptureTheClutch = await Submissions.find({ ambassadorId: submission.ambassadorId, status: 'Approved', taskId: '6ada5e962da30de8da222e18' });
+
+            if (isSubmissionExistsForCaptureTheClutch.length >= 2) {
+                submission.adminFeedback = '100 RP Given';
+            } else {
+                submission.adminFeedback = '300 RP Given';
+            }
+        } else {
+            submission.adminFeedback = adminFeedback || 'No feedback provided.';
+        }
         submission.reviewedBy = adminId;
         await submission.save();
 
