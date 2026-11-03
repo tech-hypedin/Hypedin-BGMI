@@ -781,6 +781,7 @@
 
 
 
+
 'use client';
 
 import { useState, useMemo, useEffect, useRef } from 'react';
@@ -1055,8 +1056,8 @@ export default function MissionsPage() {
     }, [mySubmissions]);
 
     /* ─── RP note per report (submission id -> note) for RP_REPORT_TASK_ID approved reports ───
-       1 or 2 approved: only the oldest (by createdAt) shows (300 RP)
-       more than 2 approved: (100 RP) */
+       The two oldest approved reports (by createdAt) show (300 RP).
+       Every approved report after those two shows (100 RP). */
     const rpNotes = useMemo<Record<string, string>>(() => {
         if (!mySubmissions || !Array.isArray(mySubmissions)) return {};
 
@@ -1068,15 +1069,9 @@ export default function MissionsPage() {
             .sort((a: any, b: any) => new Date(a.createdAt || 0).getTime() - new Date(b.createdAt || 0).getTime());
 
         const notes: Record<string, string> = {};
-        if (matching.length === 0) return notes;
-
-        if (matching.length <= 2) {
-            notes[normalizeId(matching[0]._id)] = '(300 RP)';
-        } else {
-            matching.forEach((sub: any) => {
-                notes[normalizeId(sub._id)] = '(100 RP)';
-            });
-        }
+        matching.forEach((sub: any, index: number) => {
+            notes[normalizeId(sub._id)] = index < 2 ? '(300 RP)' : '(100 RP)';
+        });
         return notes;
     }, [mySubmissions]);
 
