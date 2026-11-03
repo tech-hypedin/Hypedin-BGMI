@@ -116,7 +116,7 @@ const createReward = async (req: Request, res: Response) => {
 
 const reviewSubmission = async (req: Request, res: Response) => {
     try {
-        const { subId, status, adminFeedback } = req.body; 
+        const { subId, status, adminFeedback, customRP } = req.body; 
         const adminId = (req as any).userId;
 
         const sheetId = process.env.TASK_GSHEET;
@@ -147,7 +147,7 @@ const reviewSubmission = async (req: Request, res: Response) => {
         await submission.save();
 
         if (status === 'Approved') {
-            const taskReward = (submission.taskId as any)?.rpReward || 0;
+            const taskReward = customRP ? customRP : (submission.taskId as any)?.rpReward || 0;
             const MAX_RP_THRESHOLD = 10500;
 
             const ambassador = await Ambassadors.findById(submission.ambassadorId);
