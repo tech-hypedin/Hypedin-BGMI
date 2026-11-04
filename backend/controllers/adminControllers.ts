@@ -4,7 +4,7 @@ import Submissions from '../models/submissionsModel.js';
 import Ambassadors from '../models/ambassadorModel.js';
 
 import type { Request, Response } from 'express';
-import { updateGoogleSheetsColumnIAndK, updateGoogleSheetsColumnI } from '../utils/sheetsTracker.js';
+import { updateGoogleSheetsColumnIAndK, updateGoogleSheetsColumnI, updateGoogleSheetsColumnIAndJ } from '../utils/sheetsTracker.js';
 
 const createTask = async (req: Request, res: Response) => {
     try {
@@ -141,7 +141,7 @@ const reviewSubmission = async (req: Request, res: Response) => {
             rpToLog = customRP ? customRP : (submission.taskId as any)?.rpReward || 0;
         }
 
-        const result = await updateGoogleSheetsColumnIAndK(sheetId, 'Submission Log Season 3', subId, status, rpToLog);
+        const result = await updateGoogleSheetsColumnIAndJ(sheetId, 'Submission Log Season 3', subId, status, rpToLog);
 
         if (!result) {
             throw new Error("SHEET UPDATION FAILED");

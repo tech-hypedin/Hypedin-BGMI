@@ -247,6 +247,67 @@ export const updateGoogleSheetsColumnIAndK = async (
     }
 };
 
+export const updateGoogleSheetsColumnIAndJ = async (
+    spreadsheetId: string,
+    sheetName: string,
+    searchValue: string,
+    columnIValue: any,
+    columnJValue: any
+): Promise<boolean> => {
+    try {
+        if (!initialized) {
+            initializeSheets();
+        }
+
+        if (!spreadsheetId || !searchValue) {
+            return false;
+        }
+
+        const response = await sheets.spreadsheets.values.get({
+            spreadsheetId,
+            range: `'${sheetName}'!D:D`,
+        });
+
+        const rows = response.data.values || [];
+
+        const rowIndex = rows.findIndex(
+            (row: any) => row[0]?.toString() === searchValue.toString()
+        );
+
+        if (rowIndex === -1) {
+            return false;
+        }
+
+        const sheetRow = rowIndex + 1;
+
+        await sheets.spreadsheets.values.batchUpdate({
+            spreadsheetId,
+            requestBody: {
+                valueInputOption: 'USER_ENTERED',
+                data: [
+                    {
+                        range: `'${sheetName}'!I${sheetRow}`,
+                        values: [[columnIValue]],
+                    },
+                    {
+                        range: `'${sheetName}'!J${sheetRow}`,
+                        values: [[columnJValue]],
+                    },
+                ],
+            },
+        });
+
+        return true;
+
+    } catch (err: any) {
+        console.error(
+            '[GOOGLE SHEETS] ❌ Error updating columns I and J:',
+            err.message
+        );
+        return false;
+    }
+};
+
 export const appendToGoogleSheetsForContactForm = async (spreadsheetId: string, range: string, values: any[][]) => {
     try {
         if (!initialized) {
