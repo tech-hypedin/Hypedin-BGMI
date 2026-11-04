@@ -338,7 +338,7 @@ if (!Array.isArray(proofUrls)) {
                 'Pending'
             ]];
 
-            await appendToGoogleSheetsAtEnd(process.env.TASK_GSHEET!, 'Submission Log Season 3!A:A', sheetData);
+            await appendToGoogleSheetsAtEnd(process.env.TASK_GSHEET!, 'Submission Log Season 3', sheetData);
         }
 
         res.status(201).json({ success: true, message: 'INTEL UPLOADED', submission });
