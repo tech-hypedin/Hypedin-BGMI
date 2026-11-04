@@ -68,6 +68,62 @@ export const appendToGoogleSheets = async (spreadsheetId: string, range: string,
     }
 }
 
+export const appendToGoogleSheetsAtEnd = async (
+    spreadsheetId: string,
+    sheetName: string,
+    values: any[][]
+) => {
+    try {
+        if (!initialized) {
+            initializeSheets();
+        }
+
+        if (!spreadsheetId) {
+            throw new Error('[GOOGLE SHEETS] spreadsheetId is required');
+        }
+
+        if (!values || values.length === 0) {
+            throw new Error('[GOOGLE SHEETS] values array cannot be empty');
+        }
+
+        // Get existing values from Column A
+        const response = await sheets.spreadsheets.values.get({
+            spreadsheetId,
+            range: `'${sheetName}'!A:A`,
+        });
+
+        const rows = response.data.values || [];
+
+        // Find the last populated row
+        const lastRow = rows.reduce(
+            (last: number, row: any[], index: number) =>
+                row[0]?.toString().trim() ? index + 1 : last,
+            0
+        );
+
+        const nextRow = lastRow + 1;
+
+        // Explicitly write to the next row
+        const result = await sheets.spreadsheets.values.update({
+            spreadsheetId,
+            range: `'${sheetName}'!A${nextRow}`,
+            valueInputOption: 'USER_ENTERED',
+            requestBody: {
+                values,
+            },
+        });
+
+        return result.data;
+
+    } catch (err: any) {
+        console.error(
+            '[GOOGLE SHEETS] ❌ Error appending data:',
+            err.message
+        );
+        throw err;
+    }
+};
+
 
 export const updateGoogleSheetsByColumnD = async (
     spreadsheetId: string,

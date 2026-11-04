@@ -8,7 +8,7 @@ import Ambassadors from '../models/ambassadorModel.js';
 import Submissions from '../models/submissionsModel.js';
 
 import { drive } from '../utils/googleDrive.js';
-import { appendToGoogleSheets, updateGoogleSheetsByColumnD } from '../utils/sheetsTracker.js';
+import { appendToGoogleSheets, appendToGoogleSheetsAtEnd, updateGoogleSheetsByColumnD } from '../utils/sheetsTracker.js';
 
 import type { Request, Response } from 'express';
 import { appendPlayerToGoogleSheets } from '../utils/sheetsTracker.js';
@@ -338,7 +338,7 @@ if (!Array.isArray(proofUrls)) {
                 'Pending'
             ]];
 
-            await appendToGoogleSheets(process.env.TASK_GSHEET!, 'Submission Log Season 3!A:A', sheetData);
+            await appendToGoogleSheetsAtEnd(process.env.TASK_GSHEET!, 'Submission Log Season 3!A:A', sheetData);
         }
 
         res.status(201).json({ success: true, message: 'INTEL UPLOADED', submission });
@@ -508,7 +508,7 @@ const sendNomination = async (req: Request, res: Response) => {
             urls
         ]];
 
-        await appendToGoogleSheets(process.env.NOMINATIONS_SHEET_ID!, 'Season 2!A1', sheetData);
+        await appendToGoogleSheetsAtEnd(process.env.NOMINATIONS_SHEET_ID!, 'Season 2!A1', sheetData);
 
         return res.status(200).json({ success: false, message: 'Nomination Created' });
     } catch (err: unknown) {
@@ -701,7 +701,7 @@ const referFriend = async (req: Request, res: Response) => {
             MVPID
         ]];
 
-        await appendToGoogleSheets(process.env.PLAYER_REFERALS_SHEET!, 'Sheet1!A1', sheetData);
+        await appendToGoogleSheetsAtEnd(process.env.PLAYER_REFERALS_SHEET!, 'Sheet1!A1', sheetData);
 
         return res.status(200).json({ success: true, message: 'REFERAL INITIATED' });
     } catch(error: any) {
@@ -893,7 +893,7 @@ const submitSpecificTask = async (req: AuthRequest, res: Response) => {
             urls,
         ]];
 
-        await appendToGoogleSheets(process.env.TASK_GSHEET!, 'Submission Log Season 2!A:A', sheetData);
+        await appendToGoogleSheetsAtEnd(process.env.TASK_GSHEET!, 'Submission Log Season 2!A:A', sheetData);
 
         res.status(201).json({ success: true, message: 'INTEL UPLOADED', submission });
     } catch(error: unknown) {
