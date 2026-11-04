@@ -4,7 +4,7 @@ import Submissions from '../models/submissionsModel.js';
 import Ambassadors from '../models/ambassadorModel.js';
 
 import type { Request, Response } from 'express';
-import { updateGoogleSheetsColumnI } from '../utils/sheetsTracker.js';
+import { updateGoogleSheetsColumnIAndK, updateGoogleSheetsColumnI } from '../utils/sheetsTracker.js';
 
 const createTask = async (req: Request, res: Response) => {
     try {
@@ -135,7 +135,8 @@ const reviewSubmission = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, message: 'MISSION ALREADY PROCESSED' });
         }
 
-        const result = await updateGoogleSheetsColumnI(sheetId, 'Submission Log Season 3', subId, status);
+        const rpToLog = customRP ? customRP : (submission.taskId as any)?.rpReward || 0;
+        const result = await updateGoogleSheetsColumnIAndK(sheetId, 'Submission Log Season 3', subId, status, rpToLog);
 
         if (!result) {
             throw new Error("SHEET UPDATION FAILED");
