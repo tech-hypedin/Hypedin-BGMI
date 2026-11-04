@@ -135,7 +135,12 @@ const reviewSubmission = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, message: 'MISSION ALREADY PROCESSED' });
         }
 
-        const rpToLog = customRP ? customRP : (submission.taskId as any)?.rpReward || 0;
+        let rpToLog: number = 0;
+
+        if (status === 'Approved') {
+            rpToLog = customRP ? customRP : (submission.taskId as any)?.rpReward || 0;
+        }
+
         const result = await updateGoogleSheetsColumnIAndK(sheetId, 'Submission Log Season 3', subId, status, rpToLog);
 
         if (!result) {
