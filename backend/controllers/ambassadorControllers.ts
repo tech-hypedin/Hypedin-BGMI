@@ -201,7 +201,7 @@ if (!Array.isArray(proofUrls)) {
 
         const isLinkExists = await Submissions.findOne({ proofUrls: { $in: proofUrls } });
 
-        if (task.title !== "Capture the Clutch" && isLinkExists) {
+        if (task.title === "Capture the Clutch" && isLinkExists) {
             return res.status(400).json({ success: false, message: "LINK ALREADY EXISTS" });
         }
 
