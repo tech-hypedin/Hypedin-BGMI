@@ -766,7 +766,7 @@ export default function AmbassadorDashboard() {
     const [loading, setLoading] = useState(true);
     const [showSetup, setShowSetup] = useState(false);
     const [rankIcon, setRankIcon] = useState<any>(null);
-    const [showPromo, setShowPromo] = useState(true);
+    // const [showPromo, setShowPromo] = useState(true);
 
     const [nowTime, setNowTime] = useState<number>(() => new Date().getTime());
 
@@ -931,7 +931,7 @@ export default function AmbassadorDashboard() {
             <SeasonBackdrop/>
 
             {/* Image Popup */}
-            {showPromo && typeof document !== 'undefined' && createPortal(
+            {/* {showPromo && typeof document !== 'undefined' && createPortal(
                 <div
                     className='fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-2 sm:p-4'
                     onClick={() => setShowPromo(false)}
@@ -959,7 +959,7 @@ export default function AmbassadorDashboard() {
                     </div>
                 </div>,
                 document.body
-            )}
+            )} */}
 
             <div className='relative z-10 mx-auto max-w-6xl space-y-5 px-3 sm:px-6 lg:px-8 py-4 sm:py-6'>
                 
