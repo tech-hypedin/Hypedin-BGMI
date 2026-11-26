@@ -55,7 +55,7 @@ app.use(cookieParser());
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  "https://bgmi-report-dashboard.vercel.app/",
+  "https://bgmi-report-dashboard.vercel.app",
 ].filter((origin): origin is string => Boolean(origin));
 
 
