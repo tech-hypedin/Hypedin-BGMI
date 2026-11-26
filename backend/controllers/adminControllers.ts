@@ -315,23 +315,41 @@ const getAmbassadors = async (req: Request, res: Response) => {
 const getSubmissionDetailsForReport = async (req: Request, res: Response) => {
     try {
         const taskId = req.query.taskId;
-
-        if (typeof taskId !== "string") {
+        const alltasks = req.query.scope;
+        
+        // Normalize taskId into an array of strings
+        let taskIds: string[] = [];
+        
+        if (typeof taskId === "string") {
+            taskIds = [taskId];
+        } else if (
+            Array.isArray(taskId) &&
+            taskId.every((id): id is string => typeof id === "string")
+        ) {
+            taskIds = taskId;
+        }
+        
+        // Fetch ambassadors
+        const ambassadors = await Ambassadors.find({});
+        
+        if (ambassadors.length === 0) {
+            return res.status(404).json({ success: false, message: "NO AMBASSADORS FOUND" });
+        }
+        
+        let submissions;
+        
+        if (alltasks) {
+            submissions = await Submissions.find({});
+        } else if (taskIds.length > 0) {
+            submissions = await Submissions.find({ taskId: { $in: taskIds } });
+        } else {
             return res.status(400).json({ success: false, message: "INVALID OR MISSING taskId" });
         }
-
-        const ambassadors = await Ambassadors.find({});
-
-        if (ambassadors.length === 0) {
-            return res.status(500).json({ success: false, message: "SOMETHING WENT WRONG" });
-        }
-
-        const submissions = await Submissions.find({ taskId });
-
+        
         if (submissions.length === 0) {
-            return res.status(500).json({ success: false, message: "SOMETHING WENT WRONG" });
+            return res.status(404).json({ success: false, message: "NO SUBMISSIONS FOUND" });
         }
-
+        
         return res.status(200).json({ success: true, submissions, ambassadors, message: "DETAILS FETCHED" });
     } catch(error: unknown) {
         console.log(error);
