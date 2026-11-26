@@ -314,13 +314,19 @@ const getAmbassadors = async (req: Request, res: Response) => {
 
 const getSubmissionDetailsForReport = async (req: Request, res: Response) => {
     try {
+        const taskId = req.query.taskId;
+
+        if (typeof taskId !== "string") {
+            return res.status(400).json({ success: false, message: "INVALID OR MISSING taskId" });
+        }
+
         const ambassadors = await Ambassadors.find({});
 
         if (ambassadors.length === 0) {
             return res.status(500).json({ success: false, message: "SOMETHING WENT WRONG" });
         }
 
-        const submissions = await Submissions.find({});
+        const submissions = await Submissions.find({ taskId });
 
         if (submissions.length === 0) {
             return res.status(500).json({ success: false, message: "SOMETHING WENT WRONG" });
